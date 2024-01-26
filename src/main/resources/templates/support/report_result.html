@@ -1,0 +1,154 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
+<!-- header end -->
+<div class="mnb_wrap">
+	<div class="div_inner2">
+		<ul class="mnb_list"><!-- 1:1 / 신고 tab -->
+			<li class=active><a href="/support/report_1_1"></span>1:1 문의</a></li>
+			<li class=active><a href="/support/report_bug">신고</a></li>
+			<li class=active><a href="/support/report_1_1_list">문의 내역</a></li>
+			<li class=active><a href="/support/report_bug_list">신고 내역</a></li>
+			<li class=active><a href="/support/report_result">완료 목록</a></li>
+		</ul>
+	</div>
+</div>
+<div class="mnb_blank"></div>
+<style>
+	.gd_list_item li{
+		width: 500px;
+	}
+	.sup_writer em{
+		border-right: 1px dotted #888888;
+		padding-right: 50px;
+	}
+	.sup_writer2 em{
+		width: 100px;
+		border-right: 1px dotted #888888;
+		padding-right: 50px;
+	}
+	.dpaging{
+		text-align: center;
+	}
+	.list_top01{
+		width: 600px;
+	}
+	.li_top_text{
+		padding-right: 100px;
+	}
+	.page_block{
+		margin-left:50%;
+	}
+</style>
+<script>
+		function submitKey1(){
+			document.key1.submit();
+		}
+		function submitKey2(){
+			document.key2.submit();
+		}
+	</script>
+<!-- container str -->
+<div id="container">
+	<!-- div_inner str -->
+	<div class="div_inner">
+		<!-- notice_wrap str -->
+		<div class="contents_wrap2">
+			<h1 class="con_title" th:align="center">
+				답변된 문의 내역
+			</h1>
+			<div class="gd_main_list">
+				<!-- 2개의 리스트를 따로 반복문을 돌려 출력-->
+				<div class="list_top01">
+					<form name="key1">
+						<h1><div class="li_top_text">1:1 문의 &nbsp;</div>
+							<div class="board_search" style="float: right; margin-right: 0px;">
+								<span class="word_input" style="margin-top:0;">
+									<input type="text" name="searchKeyword1">
+									<span class="btn">
+										<a href="#a" onclick="submitKey1()">
+											<img src="https://ssl.nexon.com/s2/game/maplestory/renewal/common/board_top_search_btn.png" alt="">
+										</a>
+									</span>
+								</span>
+							</div>
+						</h1>
+					</form>
+					<ul class="gd_list_item" style="background-color: white;">
+						<h3 id="h33">
+							<div id="nick">답변 시간</div>
+							<div id="tititle">제목</div>
+							<div id="tititle">문의 종류</div>
+						</h3>
+						<li th:each="inquery, state:${inqueryList}">
+							<a th:href="@{/support/report_1_1_view(inquerySeq=${inquery.inquerySeq})}">
+								<div class="sup_writer">
+									<em th:text="${#dates.format(inquery.inqueryCreateDate, 'MM-dd (E) HH:mm')}"></em>
+								</div>
+								<div class="sup_writer2">
+									<em th:unless="${#strings.length(inquery.inqueryTitle)}>7"th:text="${inquery.inqueryTitle}"></em>
+									<em th:if="${#strings.length(inquery.inqueryTitle)}>7" th:text="|${#strings.substring(inquery.inqueryTitle,0,6)}...|"></em>
+								</div>
+ 									<em th:if="${#strings.equals(inquery.inquerySelect,'2')}">상품관련 문의</em>
+ 									<em th:if="${#strings.equals(inquery.inquerySelect,'1')}">1:1 문의</em>
+							</a>
+						</li>
+					</ul>
+					<div class="page_block">
+						<th:block th:if="${!inqueryList.empty}" th:each="page:${#numbers.sequence(startPage1, endPage1)}">
+							<a th:if="${page != nowPage1}"
+								th:href="@{/admin/report_admin(pageable1_page=${page - 1},searchKeyword1=${param.searchKeyword1})}"
+								th:text="${page}"></a>
+							<strong th:if="${page == nowPage1}" th:text="${page}" style="color:red"></strong>
+						</th:block>
+					</div>
+				</div>
+				<div class="list_top01">
+					<form name="key2">
+						<h1><div class="li_top_text">신고 접수 &nbsp;</div>
+							<div class="board_search" style="float: right; margin-right: 0px;">
+								<span class="word_input" style="margin-top:0;">
+									<input type="text" name="searchKeyword3">
+									<span class="btn"><a href="#a" onclick="submitKey2()"><img
+												src="https://ssl.nexon.com/s2/game/maplestory/renewal/common/board_top_search_btn.png"
+												alt=""></a></span>
+								</span>
+							</div>
+						</h1>
+					</form>
+					<ul class="gd_list_item" style="background-color: white;">
+						<h3 id="h33">
+							<div id="nick">답변 시간</div>
+							<div id="tititle">제목</div>
+							<div id="tititle">신고 종류</div>
+						</h3>
+						<li th:each="report, state:${reportList}">
+							<a th:href="@{/support/report_bug_view(reportSeq=${report.reportSeq})}">
+								<div class="sup_writer">
+									<em th:text="${#dates.format(report.reportCreateDate, 'MM-dd (E) HH:mm')}"></em>
+								</div>
+								<div class="sup_writer2">
+									<em th:unless="${#strings.length(report.reportTitle)}>7"th:text="${report.reportTitle}"></em>
+									<em th:if="${#strings.length(report.reportTitle)}>7" th:text="|${#strings.substring(report.reportTitle,0,6)}...|"></em>
+								</div>
+ 									<em th:if="${#strings.equals(report.reportSelect,'2')}">부정거래 신고</em>
+ 									<em th:if="${#strings.equals(report.reportSelect,'1')}">욕설 신고</em>
+							</a>
+						</li>
+					</ul>
+					<div class="page_block">
+						<th:block th:if="${!reportList.empty}" th:each="page:${#numbers.sequence(startPage3, endPage3)}" >
+							<a th:if="${page != nowPage3}"
+								th:href="@{/admin/report_admin(pageable3_page = ${page - 1},searchKeyword3=${param.searchKeyword3})}"
+								th:text="${page}"></a>
+							<strong th:if="${page == nowPage3}" th:text="${page}" style="color:red"></strong>
+						</th:block>
+					</div>
+				</div>
+			</div>
+			<!-- notice end -->
+		</div>
+	</div>
+	<!-- container end -->
+	<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+</html>

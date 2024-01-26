@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
+<link rel="stylesheet" href="/css/board.css" type="text/css" />
+<!-- header end -->
+<!--## 카테고리 목록 ## -->
+<div class="mnb_wrap">
+	<div class="div_inner2">
+		<ul class="mnb_list">
+			<li class="active"><a href="/board/board?boardChoice=0">자유 게시판</a></li>
+			<li class="active"><a href="/board/board?boardChoice=1">거래 게시판</a></li>
+			<li class="active"><a href="/board/board?boardChoice=2">팁 & 노하우</a></li>
+		</ul>
+	</div>
+</div>
+<div id="container">
+	<div id="mainWrapper">
+		<div class="contents_wrap2">
+			<div class="con_title">
+				<h1 th:if="${#strings.equals(param.boardChoice,'0')}">자유 게시판</h1>
+				<h1 th:if="${#strings.equals(param.boardChoice,'1')}">거래 게시판</h1>
+				<h1 th:if="${#strings.equals(param.boardChoice,'2')}">팁 & 노하우</h1>
+			</div>
+			<!--## 검색타이틀 선택 ##-->
+			<form class="searchForm" name="searchForm" action="/board/board" method="get"
+				style="float: right; margin-right: 0px;">
+				<select class="searchCode" type="text" name="searchCode" id="searchCode">
+					<option name="searchCode" value="title" selected>제목</option>
+					<option name="searchCode" value="writer">작성자</option>
+				</select>
+				<!--## 검색 입력 ##-->
+				<input class="searchKeyword" type="text" name="searchKeyword" placeholder="검색어 입력">
+				<input type="hidden" name="boardChoice" th:value="${param.boardChoice}" />
+				<button type="submit"><img
+						src="https://ssl.nexon.com/s2/game/maplestory/renewal/common/board_top_search_btn.png"
+						alt=""></button>
+			</form>
+			<!--## 게시판 목록  ##-->
+			<div>
+				<table>
+					<thead>
+						<tr>
+							<th style="width:8%;">No</th>
+							<th style="width:40%;">제목</th>
+							<th style="width:17%;">작성자</th>
+							<th style="width:15%;">작성일</th>
+							<th style="width:10%;">추천수</th>
+							<th style="width:10%;">조회수</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- 상단 고정 공지사항 -->
+						<tr th:each="notice, status:${noticeList}"
+							style=" color: black; font-weight: bold; background-color: rgb(216, 167, 239);">
+							<td th:text="${notice.boardSeq}"></td>
+							<td class="left"><img src="/img/board/notice_star.png" alt="공지" class="noticeImg"
+									style="max-width: 20px;" /><a
+									th:href="@{/board/board_view(boardSeq=${notice.boardSeq},boardChoice=${param.boardChoice}, page=${param.page}) }"
+									th:text="${notice.boardTitle}"></a></td>
+							<td th:text="${notice.boardUserId}"></td>
+							<td th:text="${#dates.format(notice.boardDate, 'yyyy-MM-dd')}">
+							<td th:text="${notice.boardRecommend}"></td>
+							<td th:text="${notice.boardViews}"></td>
+						</tr>
+						<!--## 게시물이 출력될 영역 ##-->
+						<tr th:each="board, status:${boardList}" style="background-color: rgb(248, 248, 248);">
+							<td th:text="${board.boardSeq}"></td>
+							<td class="left"><a
+									th:href="@{/board/board_view(boardSeq=${board.boardSeq},boardChoice=${param.boardChoice}, page=${param.page}) }"
+									th:text="${board.boardTitle}"></a></td>
+							<td th:text="${board.boardUserId}"></td>
+							<td th:text="${#dates.format(board.boardDate, 'yyyy-MM-dd')}">
+							<td th:text="${board.boardRecommend}"></td>
+							<td th:text="${board.boardViews}"></td>
+						</tr>
+					</tbody>
+				</table>
+				<!--## 글쓰기 ##-->
+				<span class="cm_write"><a class="btn02_b"
+						th:href="@{/board/board_write(boardChoice=${param.boardChoice})}">글쓰기
+					</a></span>
+
+			</div>
+			<div class="page_num">
+				<!--## 페이징 처리 ##-->
+				<th:block th:if="${!boardList.empty}" th:each="page : ${#numbers.sequence(startPage, endPage)}">
+					<a th:if="${page != nowPage}"
+						th:href="@{/board/board(page = ${page - 1},searchKeyword=${param.searchKeyword},boardChoice=${param.boardChoice},searchCode=${param.searchCode})}"
+						th:text="${page}"></a>
+					<strong th:if="${page == nowPage}" th:text="${page}"></strong>
+				</th:block>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- footer str -->
+<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+
+</html>

@@ -1,0 +1,73 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
+<!-- header end -->
+<!-- myBoardList.html  -->
+<link rel="stylesheet" href="/css/board.css" type="text/css" />
+<!--## 카테고리 목록 ## -->
+<div class="mnb_wrap">
+	<div class="div_inner2">
+		<ul class="mnb_list">
+			<li class="active"><a href="/board/board?boardChoice=0">자유 게시판</a></li>
+
+			<li class="active"><a href="/board/board?boardChoice=1">거래 게시판</a></li>
+
+			<li class="active"><a href="/board/board?boardChoice=2">팁 & 노하우</a></li>
+		</ul>
+	</div>
+</div>
+<div id="container">
+	<!--## 게시판 제목 ## -->
+	<div id="mainWrapper">
+		<div class="con_title">
+			<h1>내가 쓴 글</h1>
+		</div>
+		<!--## 게시판 목록  ##-->
+		<div>
+			<form>
+				<input type="hidden" id="page" name="page" th:value="${param.page}" />
+				<input type="hidden" id="boardChoice" name="boardChoice" th:value="${param.boardChoice}" />
+				<input type="hidden" id="boardSeq" name="boardSeq" th:value="${board.boardSeq}" />
+				<table>
+					<thead>
+						<tr>
+							<th style="width:8%;">No</th>
+							<th style="width:40%;">제목</th>
+							<th style="width:17%;">작성자</th>
+							<th style="width:15%;">작성일</th>
+							<th style="width:10%;">추천수</th>
+							<th style="width:10%;">조회수</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!--## 게시물이 출력될 영역 ##-->
+
+						<tr th:each="board, status:${boardList}" th:if="${board.boardUserId}">
+							<td th:text="${status.count}"></td>
+							<td class="left"><a
+									th:href="@{/board/board_view(boardSeq=${board.boardSeq},boardChoice=${param.boardChoice}, page=${param.page})}"
+									th:text="${board.boardTitle}"></a></td>
+							<td th:text="${board.boardUserId}"></td>
+							<td th:text="${#dates.format(board.boardDate, 'yyyy-MM-dd')}">
+							<td th:text="${board.boardRecommend}"></td>
+							<td th:text="${board.boardViews}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+			<div class="page_num">
+				<!--## 페이징 처리 ##-->
+				<th:block th:if="${!boardList.empty}" th:each="page : ${#numbers.sequence(startPage, endPage)}">
+					<a th:if="${page != nowPage}"
+						th:href="@{/board/board(page = ${page - 1},searchKeyword=$.   {param.searchKeyword},boardChoice=${param.boardChoice})}"
+						th:text="${page}"></a>
+					<strong th:if="${page == nowPage}" th:text="${page}"></strong>
+				</th:block>
+			</div>
+		</div>
+
+	</div>
+	<!-- container end -->
+	<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+
+</html>

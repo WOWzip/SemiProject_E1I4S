@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
+<!-- header end -->
+<div class="mnb_blank"></div>
+<!-- container str -->
+<div id="container">
+	<!-- div_inner str -->
+	<div class="div_inner">
+		<form method="get" action="/admin/answer4">
+		<!-- notice_wrap str -->
+		<div class="contents_wrap2">
+			<h1 class="con_title">
+				신고 접수
+			</h1>
+			<div class="seal_tb2" style="background-color: white;">
+				<div class="seal_col">
+					<div class="th">접수자</div>
+					<div class="td">
+						<span class="file_size" th:text="${report.reportWriter}"></span>
+					</div>
+				</div>
+				<div class="seal_col">
+					<div class="th">문의 제목</div>
+					<div class="td">
+						<span class="file_size" th:text="${report.reportTitle}"></span>
+					</div>
+				</div>
+				<div class="seal_col">
+					<div class="th">문의 종류</div>
+					<div class="td">
+						<span th:if="${report.reportSelect}==1" class="file_size">1:1 문의</span>
+						<span th:if="${report.reportSelect}==2" class="file_size">상품관련 문의</span>
+					</div>
+				</div>
+				<div class="seal_col">
+					<div class="th">첨부이미지</div>
+					<div class="td" th:if="${not #strings.equals(report.file,'nan')}">
+						<img th:src="@{/reportImgFolder/}+${report.file}">
+					</div>
+					<div class="td" th:if="${#strings.equals(report.file,'nan')}">
+						<b>첨부된 파일이 없습니다.</b>
+					</div>
+				</div>
+				<div class="seal_col">
+					<div class="th">내용</div>
+					<div class="td">
+						<span class="file_size" th:text="${report.reportContent}"></span>
+					</div>
+				</div>
+				<div class="seal_col">
+					<div class="th">답변</div>
+					<div class="td">
+							<br>
+							<span class="file_size"><textarea name="reportAnswer" style="resize: none; background-color: rgb(238, 238, 238);" cols="160" rows="5"></textarea></span>
+							<input type="hidden" name="reportSeq" th:value="${report.reportSeq}"/>
+					</div>
+				</div>
+			</div>
+			<div class="bug_btn_wrap" th:align="right">
+				<input class="btn03_g" type="submit" value="답변">
+				<input class="btn03_g" type="button" value="목록" onclick="location.href='/admin/report_admin'">
+				<input class="btn03_g" type="button" value="확인"
+					th:onclick="|location.href='@{/admin/answer2?reportSeq=}${report.reportSeq}'|">
+			</div>
+		</div>
+		</form>
+	</div>
+	<!-- container end -->
+
+	<!-- footer str -->
+	<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+
+</html>

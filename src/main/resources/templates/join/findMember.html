@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
+
+<link rel="stylesheet" type="text/css" href="/css/join.css">
+
+<body>
+	<div id="wrap">
+		<div class="find_container">
+			<div class="selectTpa">
+				<div class="informationInput">
+					<h2>아이디 / 비밀번호 찾기</h2>
+				</div>
+				<div class="find_box">
+					<a href="/join/findId" id="findId" name="findId">아이디 찾기</a>
+				</div>
+				<div class="find_box">
+					<a href="/join/findPw">비밀번호 찾기</a>
+				</div>
+				<div class="find_box">
+					<a href="/">메인페이지 이동</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+
+</html>

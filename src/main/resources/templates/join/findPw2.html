@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
+
+<link rel="stylesheet" type="text/css" href="/css/join.css">
+<script type="text/javascript" src="/js/mypage.js"></script>
+
+<body>
+	<div id="wrap">
+		<div class="find_container">
+			<div class="informationInput">
+				<h2>비밀번호 변경</h2>
+			</div>
+			<form action="/join/infoPwdUpdate" method="post" name="infoPwdUpdateForm">
+				<input type="hidden" id="id" name="id" th:value="${member.id}" />
+				<label for="name">비밀번호 :</label>
+				<input type="password" id="password" name="password" required />
+				<br /><label for="name">비밀번호 확인 :</label>
+				<input type="password" id="repassword" name="repassword" required />
+				<input type="button" value="확인" onclick="checkInfoPwdUpdate()">
+			</form>
+		</div>
+		<!-- section -->
+
+	</div>
+</body>
+
+<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
+<link rel="stylesheet" href="/css/rank.css" type="text/css" />
+<!-- header end -->
+<div class="mnb_wrap">
+	<div class="div_inner2">
+		<ul class="mnb_list">
+			<li class=active><a href="/rank/rank">랭킹 게시판</a></li>
+		</ul>
+	</div>
+</div>
+<div class="mnb_blank"></div>
+<!-- container str -->
+<div id="container">
+	<!-- div_inner str -->
+	<div class="div_inner">
+		<!-- notice_wrap str -->
+		<div class="contents_wrap2">
+			<h1 class="con_title">
+				랭킹 게시판
+			</h1>
+			<!-- 상위랭킹 3위 -->
+			<div class="rank_top">
+				<div th:each="top123, state:${top1_3}">
+					<div th:id="'rank'+${state.index +1}">
+						<img th:src="'/img/rank/rank'+${state.index +1}+'.png'" alt=""/>
+						<div>
+							<p th:text="${top123.nickName}"></p>
+							<p th:text="${top123.totalPoint} + P"></p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 랭킹3위 end -->
+			<!-- 검색창 -->
+			<div class="rank_nav">
+				<form th:action="@{/rank/rank}" method="get">
+					<input class="searchKeyword" type="text" name="searchKeyword" placeholder="닉네임 입력">
+					<button type="submit">
+						<img src="https://ssl.nexon.com/s2/game/maplestory/renewal/common/board_top_search_btn.png">
+					</button>
+				</form>
+			</div>
+			<!-- 순위, 닉네임, 누적포인트 (페이징 처리, 검색) -->
+			<div>
+				<div id="div_tb" class="rank_table_wrap">
+					<table class="rank_table">
+						<caption></caption>
+						<colgroup>
+							<col width="170px">
+							<col width="352px">
+							<col width="*">
+						</colgroup>
+						<thead>
+							<tr>
+								<th>순위</th>
+								<th>닉네임</th>
+								<th>누적포인트</th>
+							</tr>
+						</thead>
+						<tbody style="background-color: white;"> <!-- 수정함 -->
+							<tr th:if="${not #strings.isEmpty(memberList)}" th:each="rank, state:${memberList}">
+								<td>
+									<p th:text="${state.count+(memberList.getNumber()*6)}"></p>
+									<!-- getNumber(): 요청페이지 JPA기준 -->
+								</td>
+								<td th:text="${rank.nickName}"></td> <!-- 닉네임 -->
+								<td th:text="${rank.totalPoint} + P"></td><!-- 누적 포인트 -->
+							</tr>
+							<!-- 검색한 닉네임이 존재하면 출력 -->
+							<tr th:if="${not #strings.isEmpty(findmember)}">
+								<td>
+									<p th:text="${rank}"></p>
+								</td>
+								<td th:text="${findmember.nickName}"></td> <!-- 닉네임 -->
+								<td th:text="${findmember.totalPoint} + P"></td><!-- 누적 포인트 -->
+							</tr>
+							<!-- 검색한 닉네임이 존재하지 않을 때 -->
+							<tr th:if="${#strings.isEmpty(findmember)} And ${#strings.isEmpty(memberList)}">
+								<td colspan="3">
+									<h1>존재하지 않는 닉네임입니다.</h1>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<!-- 페이징 및 검색 처리 -->
+					<div class="page_num">
+						<div th:if="${not #strings.isEmpty(memberList)}">
+							<th:block  th:each="page : ${#numbers.sequence(startPage, endPage)}">
+								<a th:if="${page != nowPage}"
+									th:href="@{/rank/rank(page = ${page - 1}, searchKeyword = ${param.searchKeyword})}"
+									th:text="${page}"></a>
+								<strong th:if="${page == nowPage}" th:text="${page}" style="color:red"></strong>
+							</th:block>
+						</div>
+					</div>
+				</div>
+				<!-- 종합랭킹 : End -->
+			</div>
+		</div>
+		<!-- notice_wrap end -->
+	</div>
+	<!-- div_inner end -->
+</div>
+<!-- container end -->
+<!-- footer str -->
+<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+
+</html>

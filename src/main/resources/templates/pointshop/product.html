@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
+
+<!-- header end -->
+<div class="mnb_wrap">
+	<div class="div_inner2">
+		<ul class="mnb_list">
+			<li><a href="/pointshop/pointshop">포인트 상점</a></li>
+
+			<li><a href="/pointshop/purchaseHistory">구매내역</a></li>
+		</ul>
+	</div>
+</div>
+<style>
+	.char_view_img{
+		padding-right: 140px;
+	}
+</style>
+<!-- container str -->
+<div id="container">
+	<div class="div_inner">
+		<!-- Contents : Str -->
+		<div class="contents_wrap2">
+			<h1 class="con_title">
+				상품 상세 정보
+				<div th:align="right">
+			<button class="btn03_b" type="button" th:if="${#strings.equals(member.role,'ROLE_ADMIN')}" >
+				<a th:href="@{/pointshop/productModify(productNumber=${product.productNumber})}" style="color: white" >수정</a></button>
+		</div>
+			</h1>
+			<!--직업 소개-->
+			<div class="char_view">
+				<span class="char_view_img" id="productImg">
+					<img th:src="@{/productImage/}+${product.productImage}" alt="" style="width:400px" height="400px">
+				</span>
+				<ul class="stat">
+					<li>
+						<dl>
+							<dt>상품 이름</dt>
+							<dd><h1 th:text="${product.productName}"></h1></dd>
+						</dl>
+					</li>
+					<li>
+						<dl>
+							<dt>가격</dt>
+							<dd th:text="|${product.productPoint} point|"> point </dd>
+						</dl>
+					</li>
+					<li>
+						<dl>
+							<dt>재고</dt>
+							<dd th:text="|${product.productInventory} 개|"></dd>
+						</dl>
+					</li>
+					<li>
+						<dl>
+							<dt>문의</dt>
+							<dd><a href="/support/report_1_1">문의하기</a></dd>
+						</dl>
+					</li>
+					<li>
+						<dl>
+							<dt>상세 내용</dt>
+							<dd><pre th:text="${product.productContents}"></pre></dd>
+						</dl>
+					</li>
+				</ul>
+			</div>
+			<div th:align="center">
+				<button th:if="${not #strings.isEmpty(member.id)} and ${product.productInventory}!= 0" class="btn03_b"
+					type="button" onclick="javascript:popup()">구매하기</button>
+				<button class="btn03_b" type="button">
+					<a th:href="@{/pointshop/pointshop(page=${param.page},searchKeyword=${param.searchKeyword})}" style="color: white">이전</a></button>
+			</div>
+			<br/>
+			<input type="hidden" id="p_n" th:value="${product.productNumber}" />
+		</div>
+		
+		<br />
+		<br />
+	</div>
+</div>
+<!-- container end -->
+<!--구매하는 창 띄우기-->
+<script>
+	function popup() {
+		var pn = $('#p_n').val();
+		var url = "/pointshop/popup?productNumber=" + pn;
+		var name = "popup test";
+		var option = "width = 500, height = 450, top = 100, left = 200, right= 200"
+		window.open(url, name, option);
+	}
+</script>
+<!-- footer str -->
+<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
+
+	<link rel="stylesheet" type="text/css" href="/css/mypage.css">
+<body>
+	<div id="wrap">
+		<div class="info_container">
+			<div class="informationInput">
+				<h2 th:text="${member.name} + ' 님 환영합니다'"></h2>
+			</div>
+			<table th:align="center" border="1" th:cellpadding="0" th:cellspacing="0" th:width="700">
+				<tr>
+					<th bgcolor="orange" width="100">id</th>
+					<td th:text="${member.id}"></td>
+				</tr>
+				<tr>
+					<th bgcolor="orange" width="200">name</th>
+					<td th:text="${member.name}"></td>
+				</tr>
+				<tr>
+					<th bgcolor="orange" width="150">nickName</th>
+					<td th:text="${member.nickName}"></td>
+				</tr>
+				<tr>
+					<th bgcolor="orange" width="150">전화번호</th>
+					<td th:text="${member.phoneNumber}"></td>
+				</tr>
+				<tr>
+					<th bgcolor="orange" width="100">이메일</th>
+					<td th:text="${member.email} + ' @ ' + ${member.domain}"></td>
+				</tr>
+				<tr>
+					<th bgcolor="orange" width="100">주소</th>
+					<td th:text="${member.addr}"></td>
+				</tr>
+			</table>
+			
+			<input type="button" value="이전페이지로" onclick="location.href='/mypage/mypage'" />
+			<input type="button" value="메인페이지로" onclick="location.href='/'" />
+
+		</div>
+
+
+
+
+</body>
+<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+
+</html>

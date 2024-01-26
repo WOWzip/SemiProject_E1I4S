@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
+<!-- header end -->
+
+<!-- css, js -->
+<link rel="stylesheet" href="/css/event_view.css" type="text/css">
+<!-- css, js end -->
+
+<!-- 메뉴이동 : 공지사항, 이벤트 tab  -->
+<div class="mnb_wrap">
+	<div class="div_inner2">
+		<ul class="mnb_list">
+			<li class=active><a href="/news/notice">공지사항</a></li>
+			<li class=active><a href="/news/event">이벤트</a></li>
+		</ul>
+	</div>
+</div>
+<!-- container str -->
+<div id="container">
+	<!-- div_inner str -->
+	<div class="div_inner">
+		<!-- event_wrap str -->
+		<div class="event_wrap" style="background-color: white;">
+			<h1 class="con_title">
+				이벤트
+				<span class="con_title_btn"><a href="/news/event" class="back_btn"
+						style="width:56px; text-align:center;">목록</a></span>
+			</h1>
+
+			<!-- 이벤트 제목 -->
+			<p class="qs_title" style="margin-top:30px">
+				<span th:text="${event.eventTitle}"></span>
+			</p>
+
+			<!-- 이벤트 시작시간 및 종료시간 -->
+			<div class="qs_info_wrap">
+				<span class="event_date" th:text="'시작 시간 : ' + ${event.eventStartDate}"></span>
+				<span class="event_date" th:text="'종료 시간 : ' + ${event.eventEndDate}"></span>
+				<span th:if="${Dday} > 0" class="D_day" th:text="D- + ${Dday}"></span>
+			</div>
+
+			<!-- 이벤트 이미지 및 내용 -->
+			<div class="qs_text" >
+				<span class="se-drawing-object-wrapper se-image"
+					style="vertical-align: baseline; text-indent: 0px; display: inline-block;">
+					<img class="eventImg" th:src="@{/eventImage/}+${event.eventImageViewName}" />
+				</span>
+				<p th:text="${event.eventContents}" style="font-size: 25px; font-weight: bold;"></p>
+			</div>
+
+			<!-- 등록/수정/삭제 버튼 -->
+			<!-- 관리자세션이 있으면 버튼 생성. -->
+			<div sec:authorize="hasRole('ADMIN')" class="btn_view">
+				<a class="button_b" th:href="@{/news/eventDelete(eventSeq=${event.eventSeq})}" th:text="삭제" />
+				<a class="button_b" th:href="@{/news/eventUpdateForm(eventSeq=${event.eventSeq})}" th:text="수정" />
+				<a class="button_b" th:href="@{/news/eventWriteForm}" th:text="등록" />
+			</div>
+		</div>
+		<!-- event_wrap end -->
+	</div>
+	<!-- div_inner end -->
+</div>
+<!-- container end -->
+
+<!-- 댓글 작성란 -->
+<form th:action="replyEventForm" id="reply_write" name="reply_write" method="post" class="comments">
+	<div class="comments">
+		댓글
+	</div>
+	<div>
+		<ul class="comments_write_ul">
+			<li class="comments_write_li">
+				<input type="hidden" id="page" name="page" th:value="${param.page}" />
+				<input type="hidden" id="eventChoice" name="eventChoice" th:value="${param.eventChoice}" />
+				<input type="hidden" id="eventSeq" name="eventSeq" th:value="${event.eventSeq}" />
+				<input type="hidden" id="nickName" name="nickName" th:value="${member.nickName}" />
+				<input type="text" id="content" name="content" placeholder="내용을 입력해주세요." />
+				<input type="button" id="commentsWrite" class="comments_write_button" value="등록" />
+			</li>
+			<li id="ajtest"></li>
+		</ul>
+	</div>
+</form>
+<!-- 댓글 작성란 end -->
+<br />
+<!-- 댓글 목록 -->
+<div>
+	<table class="comments_list">
+		<thead>
+			<th class="comments_title" colspan="5">댓글</th>
+		</thead>
+		<tbody>
+			<tr th:each="replyEvent, status:${replyEventList}">
+				<td style="width: 6%;">작성자:</td>
+				<td style="width: 8%;" th:text="${replyEvent.nickName}"></td>
+				<td id="content" th:text="${replyEvent.content}">
+
+				</td>
+				<input type="hidden" name="replyEventSeq" id="replyEventSeq" th:value="${replyEvent.replyEventSeq}" />
+				<td style="width: 10%;">&nbsp;
+					<span>
+						<a class="comments_update" th:if="${replyEvent.nickName}==${member.nickName}"
+							th:onclick="|window.open('/news/replyModify?replyEventSeq=${replyEvent.replyEventSeq}','replyModifyForm', 'width=500,height=250')|">수정</a>
+					</span>
+					<span><a class="comments_update" th:if="${replyEvent.nickName}==${member.nickName}"
+							th:href="@{/news/replyDelete(replyEventSeq=${replyEvent.replyEventSeq}, eventChoice=${param.eventChoice}, page=${param.page})}">삭제</a></span>
+				</td>
+				<td style="width: 10%;" th:text="${#dates.format(replyEvent.replyDate, 'yyyy-MM-dd')}">
+			</tr>
+		</tbody>
+	</table>
+	<!-- 댓글 목록 end -->
+</div>
+<!-- 등록버튼 누르면 발생되는 function() -->
+<script th:inline="javascript">
+	/*<![CDATA[*/
+	const member = /*[[${member}]]*/;
+	$(document).ready(function () {
+		$("#commentsWrite").click(function () {
+			if (member.id == null) {
+				var check = confirm("로그인이 필요합니다. 로그인 하시겠습니까?");
+				if (check) {
+					location.href = "/login";
+					return true;
+				} else {
+					return false;
+				}
+			}
+			else if ($("#content").val() == '') {
+				alert("내용을 입력해주세요");
+				return false;
+			}
+			$("#reply_write").submit();
+		});
+	});
+		/*]]>*/
+</script>
+<!-- 등록버튼 누르면 발생되는 function() end -->
+<!-- footer str -->
+<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+
+</html>

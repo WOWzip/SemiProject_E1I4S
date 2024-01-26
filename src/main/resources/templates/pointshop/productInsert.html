@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
+<!-- header end -->
+<div class="mnb_wrap">
+	<div class="div_inner2">
+		<ul class="mnb_list">
+			<li><a href="/pointshop/pointshop">포인트 상점</a></li>
+
+			<li><a href="/pointshop/purchaseHistory">구매내역</a></li>
+		</ul>
+	</div>
+</div>
+<!-- container str -->
+<div id="container">
+	<!-- div_inner str -->
+	<div class="div_inner">
+		<!-- notice_wrap str -->
+		<div class="contents_wrap2">
+			<form action="/pointshop/insert" method="post" enctype="multipart/form-data">
+				<input type="hidden" id="adminId" name="adminId" value="작성자1"><!--작성자 정보 세션으로 가져오기-->
+				<h1 class="con_title">
+					상품등록
+				</h1>
+				<div class="seal_tb2">
+					<div class="seal_col">
+						<div class="th">상품 이름 </div>
+						<div class="td"> &nbsp;
+							<input type="text" name="productName" class="seal_title"
+								placeholder="35자 이내로입력해 주세요." /><!--상품 이름-->
+						</div>
+					</div>
+					<div class="seal_col">
+						<div class="th price">가격</div>
+						<div class="td">
+							<input type="text" name="productPoint" class="seal_title" /> <!--상품 가격-->
+						</div>
+					</div>
+					<div class="seal_col" style="height: 30px;">
+						<div class="th price">재고</div>
+						<div class="td">
+							<input type="text" name="productInventory" class="seal_title" /> <!--상품 가격-->
+						</div>
+					</div>
+					<div class="seal_col">
+						<div class="th">파일첨부</div>
+						<div class="td">
+							<input type="file" name="productImage">
+							<span class="file_size">최대 파일용량 : 5MByte</span>
+						</div>
+					</div>
+					<div class="seal_col">
+						<div class="th title">내용</div>
+						<div class="td">
+							<textarea class="seal_text_area" id="productContents"
+								name="productContents" style="resize: none;"></textarea><!--내용-->
+						</div>
+					</div>
+				</div>
+				<div class="bug_btn_wrap" th:align="right">
+					<input class="btn03_b" type="submit" value="확인" onclick="alert('등록 완료')">
+					<input class="btn03_b" type="reset" value="다시 작성">
+					<input class="btn03_g" type="button" value="취소" onclick="location.href='/pointshop/pointshop'">
+				</div>
+			</form>
+		</div>
+		<!-- notice_wrap end -->
+	</div>
+	<!-- div_inner end -->
+</div>
+<!-- container end -->
+<!-- footer str -->
+<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+
+</html>

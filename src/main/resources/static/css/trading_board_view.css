@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+
+#writeWrapper{
+	width: 830px;
+	padding-bottom: 300px;
+	margin: 0 auto; /*가운데 정렬*/
+}
+
+.con_title{
+	font-size: 34px;
+	color: #333;
+	margin-top: 50px;
+	width: 100%;
+    float: left;
+	margin-bottom: 40px;
+	height: 40px;
+}
+table{
+	border: 1px solid #e3e3e3;
+	width: 820px;
+}
+td ,tr{
+	border: 1px solid #e3e3e3;
+}
+
+
+.button{
+	margin-top: 10px;
+}
+
+.bt_write{
+    float: right;
+    text-align: right;
+    width: auto;
+    margin-top: 15px;
+    margin-right: 10px;
+}

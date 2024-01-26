@@ -1,0 +1,77 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
+		<!-- header end -->
+		<style>
+		.seal_text_area {
+		    width: 500%;
+		}
+		</style>
+		<div class="mnb_wrap">
+			<div class="div_inner2">
+				<ul class="mnb_list"><!-- 1:1 / 신고 tab -->
+					<li class=active><a href="/support/report_1_1"></span>1:1 문의</a></li>
+					<li class=active><a href="/support/report_bug">신고</a></li>
+					<li class=active><a href="/support/report_1_1_list">문의 내역</a></li>
+					<li class=active><a href="/support/report_bug_list">신고 내역</a></li>
+					<li class=active><a href="/support/report_result">완료 목록</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="mnb_blank"></div>
+		<!-- container str -->
+		<div id="container">
+			<!-- div_inner str -->
+			<div class="div_inner">
+				<!-- notice_wrap str -->
+				<div class="contents_wrap2">
+					<form action="/support/reportSubmit" method="post" enctype="multipart/form-data">
+						<input type="hidden" id="reportWriter" name="reportWriter" th:value="${member.id}"><!--작성자 정보 세션으로 가져오기--> 
+					<h1 class="con_title">
+						신고
+					</h1>
+					<div class="seal_tb2" style="background-color: white;">
+						<div class="seal_col">
+							<div class="th">문의 종류</div>
+							<div class="td">
+								<span class="sort_wrap2">
+									<a href="#a" class="cus_sel_a">욕설 신고</a>
+									<ul>
+										<li><a href="#a">욕설 신고</a></li>
+										<li><a href="#a">부정거래 신고</a></li>
+									</ul>
+									<select name="reportSelect"><!--문의 종류-->
+										<option value="1">욕설 신고</option>
+										<option value="2">부정거래 신고</option>
+									</select>
+								</span>
+								<input type="text" name="reportTitle" class="reportTitle" placeholder="35자 이내로입력해 주세요." /><!--문의 제목-->
+							</div>
+						</div>
+						<div class="seal_col">
+							<div class="th">파일첨부</div>
+							<div class="td">
+								<input type="file" name="file">
+								<span class="file_size">최대 파일용량 : 5MByte</span>
+							</div>
+						</div>
+						<div class="seal_col">
+							<div class="th title">내용</div>
+							<div class="td">
+								<textarea class="seal_text_area" id="reportContent" name="reportContent" style="resize:none;"></textarea><!--내용-->
+							</div>
+						</div>
+					</div>
+					<div class="bug_btn_wrap" th:align="right">
+						<input class="btn03_g" type="submit" value="확인">
+						<input class="btn03_b" type="reset" value="다시 작성">
+					</div>
+					</form>
+				</div>
+				<!-- notice_wrap end -->
+			</div>
+			<!-- div_inner end -->
+		</div>
+		<!-- container end -->
+		<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+</html>

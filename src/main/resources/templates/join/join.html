@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
+<link rel="stylesheet" type="text/css" href="/css/join.css">
+<script type="text/javascript" src="/js/join.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+<script>
+	function execDaumPostcode() {
+		new daum.Postcode({
+			oncomplete: function (data) {
+				// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+				// 각 주소의 노출 규칙에 따라 주소를 조합한다.
+				// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+				var addr = ''; // 주소 변수
+				var extraAddr = ''; // 참고항목 변수
+
+				//사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+				if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+					addr = data.roadAddress;
+				} else { // 사용자가 지번 주소를 선택했을 경우(J)
+					addr = data.jibunAddress;
+				}
+
+				// 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+				if (data.userSelectedType === 'R') {
+					// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+					// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+					if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+						extraAddr += data.bname;
+					}
+					// 건물명이 있고, 공동주택일 경우 추가한다.
+					if (data.buildingName !== '' && data.apartment === 'Y') {
+						extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+					}
+					// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+					if (extraAddr !== '') {
+						extraAddr = ' (' + extraAddr + ')';
+					}
+					// 조합된 참고항목을 해당 필드에 넣는다.
+					document.getElementById("extraAddress").value = extraAddr;
+
+				} else {
+					document.getElementById("extraAddress").value = '';
+				}
+
+				// 우편번호와 주소 정보를 해당 필드에 넣는다.
+				document.getElementById('postcode').value = data.zonecode;
+				document.getElementById("address").value = addr;
+				// 커서를 상세주소 필드로 이동한다.
+				document.getElementById("detailAddress").focus();
+
+			}
+		}).open();
+	}
+
+	function checkId() {
+		var id = $('#id').val();
+		const regId = new RegExp(/^[A-Za-z]{1}[A-Za-z0-9]{3,19}$/);
+
+		if ($('#id').val() == "") {
+			alert("아이디을 입력하세요~");
+			$('#id').focus();
+			return;
+		} else if (regId.test($('#id').val()) != true) {
+			alert("아이디는 4 ~ 20자 이내입니다.")
+			$('#id').focus();
+			return;
+		}
+
+		console.log(id);
+
+		$.ajax({
+			url: "checkId",
+			type: 'post',
+			data: {
+				"id": id
+			},
+			async: true,
+			success: function (data) {
+				console.log(data);
+				if (id != null) {
+					if (data === 'YES') {
+						console.log(data);
+						if (confirm("사용 가능한 아이디입니다. \n사용하시겠습니까?")) {
+							$("#id").attr("readonly", true);
+							$("#id").css("background-color", "gainsboro");
+							$("#checkId1").attr("disabled", true);
+							$("#checkId1").css("display", "none");
+							$("#resetId1").attr("disabled", false);
+							$("#resetId1").css("display", "inline-block");
+						}
+						return false;
+					} else {
+						console.log(data);
+						console.log("다름");
+						alert("있는 아이디");
+						$("#id").focus();
+					}
+				}
+
+			},
+			error: function () {
+				alert("error");
+			}
+		});
+	}
+
+	function resetId() {
+		$("#id").attr("readonly", false);
+		$("#id").css("background-color", "white");
+		$("#checkId1").attr("disabled", false);
+		$("#checkId1").css("display", "inline-block");
+		$("#resetId1").attr("disabled", true);
+		$("#resetId1").css("display", "none");
+	}
+
+</script>
+
+<body>
+	<div id="wrap">
+		<div class="join_container">
+			<div class="informationInput">
+				<h2>상세 정보 입력</h2>
+			</div>
+			<form name="joinForm" th:action="joinSuccess" method="post" th:object="${member}">
+				<label for="id">ID:</label> <!-- 4 ~ 20자리, 첫글자 숫자 x-->
+				<input type="text" class="id" id="id" name="id" placeholder="id">
+				<input class="" type="button" id="checkId1" onclick="checkId()" value="중복 체크" />
+				<input class="" type="button" id="resetId1" onclick="resetId()" disabled value="다시입력" style="display: none"/>
+				<br />
+				<label for="password">Password:</label> <!--최소 8자리, 숫자,문자,특수문자 최소 1개-->
+				<input type="password" id="password" name="password" required><br>
+
+				<label for="repassword">rePassword:</label>
+				<input type="password" id="repassword" name="repassword" required><br>
+
+				<label for="name">Name:</label> <!-- 한글 이름 2~4자 이내 -->
+				<input type="text" id="name" th:name="name" th:value="${member.name}" readonly required /><br>
+
+				<label for="nickName">Nickname:</label> <!-- 글자수만 제한 2~20 -->
+				<input type="text" id="nickName" name="nickName" required><br>
+
+				<label for="phoneNumber">Phone Number:</label>
+				<input type="tel" id="phoneNumber" th:name="phoneNumber" maxlength="11" th:value="${member.phoneNumber}"
+					readonly required /><br>
+
+				<label for="birth">주민번호 :</label>
+				<input type="text" id="birth" name="birth" size="7" maxlength="6" value="" readonly required />
+				<strong>-</strong>
+				<input type="password" id="backSocialSecuNum" name="backSocialSecuNum" value="" maxlength="7" readonly
+					required />
+
+				<input type="hidden" id="socialSecuNum" th:name="socialSecuNum" th:value="${member.socialSecuNum}"
+					readonly required />
+
+				<label for="email">Email:</label>
+				<input type="email" id="email" name="email" required>
+				<strong>@</strong>
+				<!-- 도메인 선택 구현-->
+				<input type="text" id="domain" name="domain">
+				<select class="box" id="domain-list">
+					<option value="type">직접 입력</option>
+					<option value="naver.com">naver.com</option>
+					<option value="google.com">google.com</option>
+					<option value="hanmail.net">hanmail.net</option>
+					<option value="nate.com">nate.com</option>
+					<option value="kakao.com">kakao.com</option>
+				</select>
+
+				<script>
+
+					// 도메인 직접 입력 or domain option 선택
+					const domainListEl = document.querySelector('#domain-list')
+					const domainInputEl = document.querySelector('#domain')
+					// select 옵션 변경 시
+					domainListEl.addEventListener('change', (event) => {
+						// option에 있는 도메인 선택 시
+						if (event.target.value !== "type") {
+							// 선택한 도메인을 input에 입력하고 disabled
+							domainInputEl.value = event.target.value
+						} else { // 직접 입력 시
+							// input 내용 초기화 & 입력 가능하도록 변경
+							domainInputEl.value = ""
+						}
+					})
+				</script>
+
+				<!-- https://postcode.map.daum.net/guide -->
+				<label for="postcode">주 소 :</label>
+				<input type="text" id="postcode" placeholder="우편번호">
+				<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+				<input type="text" id="address" placeholder="주소"><br>
+				<input type="text" id="detailAddress" placeholder="상세주소">
+				<input type="text" id="extraAddress" placeholder="참고항목"><br>
+
+				<script>
+					$(document).ready(function () {
+						// Function to update combinedAddress field
+						function updateCombinedAddress() {
+							let address1 = $('#postcode').val();
+							let address2 = $('#address').val();
+							let address3 = $('#detailAddress').val();
+							let address4 = $('#extraAddress').val();
+
+							var combinedAddress = address1 + "/" + address2 + "/" + address3 + "/" + address4;
+
+							$("#addr").val(combinedAddress.trim());
+						}
+
+						// Call the function when any of the input fields change
+						$('#postcode, #address, #detailAddress, #extraAddress').on('input', function () {
+							updateCombinedAddress();
+						});
+
+						// Initial update on page load
+						updateCombinedAddress();
+
+						function updateSocialSecuNum() {
+							let socialSecuNum = $("#socialSecuNum").val();
+
+							console.log(socialSecuNum);
+
+
+
+							var birth = socialSecuNum.substring(0, 6);
+							var backSocialSecuNum = socialSecuNum.substring(6, 13);
+
+							console.log(birth);
+							console.log(backSocialSecuNum);
+
+
+							$("#birth").val(birth.trim());
+							$("#backSocialSecuNum").val(backSocialSecuNum.trim());
+
+							$("#name").css("background-color", "gainsboro");
+							$("#phoneNumber").css("background-color", "gainsboro");
+							$("#birth").css("background-color", "gainsboro");
+							$("#backSocialSecuNum").css("background-color", "gainsboro");
+						}
+
+						updateSocialSecuNum();
+
+					});
+
+
+				</script>
+
+				<input type="hidden" id="addr" name="addr"><br>
+
+
+				<input type="hidden" id="role" name="role" value="ROLE_USER" /><br />
+				<input type="hidden" id="point" name="point" value="0" /><br />
+
+				<input type="hidden" id="totalPoint" name="totalPoint" value="0"><br />
+
+				<input type="button" value="등록" onclick="checkJoin()" />
+				<input type="button" value="메인페이지로" onclick="location.href='/'" />
+			</form>
+		</div>
+	</div>
+
+</body>
+<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+
+</html>

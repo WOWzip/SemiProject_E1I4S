@@ -1,0 +1,163 @@
+@charset "UTF-8";
+    
+/* 상세보기페이지 */
+.event_wrap {
+	border-bottom: 1px gray;
+}
+
+.qs_title {
+    float: left;
+    width: 95%;
+    line-height: 1.3;
+    min-height: 36px;
+    border-top: 1px solid #7e7e7e;
+    color: #333;
+    font-size: 24px;
+	background-color: rgb(238, 220, 196);
+    word-break: break-all;
+    font-weight: bold;
+    padding: 37px 27px 30px;
+    margin-top: 0 !important;
+}
+
+
+/* D-Day 표시 */
+.D_day{
+	text-align: center;
+	font-weight: bold;
+	color: white;
+	width: 50px;
+	float: right;
+	margin-right: 1%;
+	border-radius: 50%;
+	background-color: deeppink;
+}
+/*=================================================*/
+
+/* 버튼 */
+
+.button{
+	margin-top: 10px;
+}
+
+.button_b{ 
+	float: right;
+    text-align: right;
+    margin-top: 15px;
+    margin-right: 10px;
+	font-size:16px; 
+	color:#fff !important; 
+	text-align:center; 
+	background-color:#455d9d; 
+	border-radius:2px; 
+	padding:10px 14px 10px 14px; 
+	border:1px solid #455d9d;
+	display:block;
+	line-height:1
+}
+
+.button_b:hover{background-color:#324b90; border:1px solid #324b90;}    
+    
+/*=================================================*/
+
+/* 이벤트 기간 */
+.event_date {
+	line-height: 55px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: 0;
+    text-decoration: none;
+    font-family: "NanumBarunGothic" , "Malgun Gothic" , sans-serif;
+    letter-spacing: -0.03em;
+    float: left;
+    margin-left: 27px;
+    padding-left: 17px;
+    background: url("https://ssl.nexon.com/s2/game/maplestory/renewal/common/date_icon_new.png") left 19px no-repeat;
+    font-size: 13px;
+    color: #666;
+}   
+    
+/*=================================================*/  
+
+/* 이미지 */
+.eventImg {
+	width: 100%;
+	height: 100%;
+    line-height: 1.3;
+    min-height: 36px;
+}
+/*=================================================*/  
+
+/* 댓글 css */
+
+.comments{
+	width: 1194px;
+	padding-bottom: 20px;
+	margin: 0 auto; /*가운데 정렬*/
+	font-weight:bold;
+	font-size: 20px;
+}
+#content {
+	width: 1194px;
+	height:80px;
+	border: 1.5px solid #e3e3e3;
+}
+
+table{
+	border: 1px solid #e3e3e3;
+	width: 820px;
+}
+
+tr, td {
+	border: 1.5px solid #e3e3e3;
+}
+
+.comments_list{
+	width: 1194px;
+	margin: 0 auto; /*가운데 정렬*/
+	margin-bottom: 100px;
+}
+
+#reply{
+	border-bottom:1px solid silver;
+}
+
+.comments_title{
+	color: black;
+	background-color: rgb(241, 219, 76);
+	height: 30px;
+	margin-bottom: 5px;
+}
+.text_writer{
+	font-size: 12px;
+}
+
+/* 상세 페이지 */
+.qs_text {
+	width: 100%;
+	display: block;
+	margin: 20px 0px 20px 0px;
+	background-color: white;
+}
+
+.reply_b{
+	float: right;
+}
+.comments_update{
+	color: black;
+	font-size: 14px;
+}
+
+.comments_write_button{
+	font-size:14px; 
+	color:#fff !important; 
+	background-color:rgb(157, 155, 48); 
+	padding:8px 12px 8px 12px; 
+	border:1px solid rgb(157, 155, 48);
+	line-height: 1;
+	float: right;
+}
+
+.comments_write_button:hover{background-color:rgb(144, 119, 49); border:1px solid rgb(144, 119, 49);}
+

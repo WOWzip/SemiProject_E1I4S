@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
+<!-- header end -->
+<div class="mnb_wrap">
+	<div class="div_inner2">
+		<ul class="mnb_list">
+			<li><a href="/pointshop/pointshop">포인트 상점</a></li>
+
+			<li><a href="/pointshop/purchaseHistory">구매내역</a></li>
+		</ul>
+	</div>
+</div>
+<!-- container str -->
+<div id="container">
+	<div class="div_inner">
+		<!-- Contents : Str -->
+		<div class="contents_wrap2">
+			<form th:action="@{/pointshop/pointshop}" name="sform">
+				<h1 class="con_title">
+					포인트 상점
+					<span class="word_input" style="margin-top:0;">
+						<input type="text" name="searchKeyword">
+						<span class="btn"><a href="#a" onclick="submitForm()"><img
+									src="https://ssl.nexon.com/s2/game/maplestory/renewal/common/board_top_search_btn.png"
+									alt=""></a></span>
+					</span>
+				</h1>
+			</form>
+			<div class="media_wrap"> <!--상점 이미지-->
+				<ul class="media_list"> <!--상점 리스트-->
+					<li th:each="product, state:${productList}">
+
+						<div class="m_sum">
+							<img th:unless="${product.productInventory == 0}"
+								th:src="@{/productImage/}+${product.productImage}" th:alt="${product.productImage}" style="width:100%; height: 300px;">
+							<img th:if="${product.productInventory == 0}" src="/img/pointshop/soldout.png"
+								th:alt="${product.productImage}">
+						</div>
+						<span class="m_cover"><a
+								th:href="@{/pointshop/product(productNumber=${product.productNumber})}">
+							</a></span>
+						<dl class="m_info">
+							<dt>
+								<a th:href="@{/pointshop/product(productNumber=${product.productNumber}, page=${param.page}, searchKeyword=${param.searchKeyword})}"
+									th:text="${product.productName}+ ' / '+${product.productPoint}+'point'"></a>
+							</dt>
+						</dl>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- Contents : End -->
+		<div th:align="center">
+			<th:block th:if="${!productList.empty}" th:each="page : ${#numbers.sequence(startPage, endPage)}">
+				<a th:if="${page != nowPage}"
+					th:href="@{/pointshop/pointshop(page = ${page - 1}, searchKeyword = ${param.searchKeyword})}"
+					th:text="${page}"></a>
+				<strong th:if="${page == nowPage}" th:text="${page}" style="color:rgb(180, 234, 254)"></strong>
+			</th:block>
+		</div>
+		<br />
+		<div th:align="right">
+			<input th:if="${#strings.equals(member.role,'ROLE_ADMIN')}" class="btn03_b" type="button" value="등록"
+				onclick="location.href='/pointshop/productInsert'">
+			<input class="btn03_b" type="button" value="전체보기" onclick="location.href='/pointshop/pointshop'">
+		</div>
+		<br />
+	</div>
+</div>
+<!-- container end -->
+<!-- footer str -->
+<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+
+</html>

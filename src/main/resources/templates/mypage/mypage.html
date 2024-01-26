@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
+
+<link rel="stylesheet" type="text/css" href="/css/mypage.css">
+
+<body>
+
+	<div id="wrap">
+		<!-- SECTION -->
+		<div id="mypage_container">
+			<div class="topNav">
+					
+				<h2 class="myPage"><a th:href="@{/mypage/info}" title="내정보 관리"><span>내정보 관리</span></a></h2>
+				<ul class="myPage">
+					<li class="myPage1"><a th:href="@{/mypage/checkPassword(select=0)}" title="회원정보 변경"><span>개인정보 변경</span></a>
+					</li>
+					<li th:if="${#strings.isEmpty(member.provider)}" class="myPage2"><a th:href="@{/mypage/checkPassword(select=1)}" title="비밀번호 변경"><span>비밀번호 변경</span></a>
+					</li>
+					<li class="myPage3"><a th:href="@{/mypage/checkPassword(select=2)}" title="회원탈퇴"><span>회원탈퇴</span></a></li>
+				</ul>
+				<h2 class="security"><a th:href="@{/support/report_1_1}" title="고객센터"><span>고객센터</span></a>
+				</h2>
+				<ul class="security">
+					<li class="security1"><a th:href="@{/support/report_1_1}" title="1:1 문의"><span>1:1 문의</span></a>
+					</li>
+					<li class="security2"><a th:href="@{/support/report_bug}" title="신고"><span>신고</span></a>
+					</li>
+				</ul>
+				<h2 class="nxCash"><a th:href="@{/pointshop/pointshop}" title="포인트 상점"><span>포인트</span></a></h2>
+				<ul class="nxCash">
+					<li class="nxCash1"><a href="/guide/guide" title="포인트 획득 방법"><span>포인트 획득 방법</span></a></li>
+					<li class="nxCash2"><a href="/pointshop/purchaseHistory" title="포인트 이용 내역"><span>포인트 이용
+								내역</span></a></li>
+				</ul>
+			</div>
+		</div>
+
+		<!-- SECTION END -->
+
+	</div>
+</body>
+<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+
+</html>

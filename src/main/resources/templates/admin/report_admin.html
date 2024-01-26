@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
+<!-- header end -->
+<style>
+	.sup_writer em{
+		padding-right: 20px;
+	}
+	.dpaging{
+		text-align: center;
+	}
+</style>
+<div class="mnb_blank"></div>
+<!-- container str -->
+<div id="container">
+	<script>
+		function submitKey1(){
+			document.key1.submit();
+		}
+		function submitKey2(){
+			document.key2.submit();
+		}
+		function submitKey3(){
+			document.key3.submit();
+		}
+	</script>
+	<!-- div_inner str -->
+	<div class="div_inner">
+		<!-- notice_wrap str -->
+		<div class="contents_wrap2">
+			<h1 class="con_title" th:align="center">
+				답변 대기 현황
+			</h1>
+			<div class="gd_main_list" >
+				<div class="list_top01">
+					<form name="key1">
+						<h1>1:1 문의 현황 &nbsp;
+							<div class="board_search" style="float: right; margin-right: 0px;">
+								<span class="word_input" style="margin-top:0;">
+									<input type="text" name="searchKeyword1">
+									<span class="btn">
+										<a href="#a" onclick="submitKey1()">
+											<img src="https://ssl.nexon.com/s2/game/maplestory/renewal/common/board_top_search_btn.png" alt="">
+										</a>
+									</span>
+								</span>
+							</div>
+						</h1>
+					</form>
+					<ul class="gd_list_item" style="background-color: white;">
+						<h3 id="h33">
+							<div id="nick">아이디</div>
+							<div id="tititle">제목</div>
+						</h3>
+						<li th:each="inquery, state:${inqueryList1}">
+							<a th:href="@{/admin/report_view_admin(inquerySeq=${inquery.inquerySeq})}">
+								<div class="sup_writer">
+									<em th:if="${#strings.length(inquery.inqueryWriter)}>8" th:text="|${#strings.substring(inquery.inqueryWriter, 0, 5)}...|"></em>
+									<em th:unless="${#strings.length(inquery.inqueryWriter)}>8" th:text="${inquery.inqueryWriter}"></em>
+								</div>
+									<em th:if="${#strings.length(inquery.inqueryTitle)}>8" th:text="|${#strings.substring(inquery.inqueryTitle, 0, 7)}...|"></em>
+									<em th:unless="${#strings.length(inquery.inqueryTitle)}>8" th:text="${inquery.inqueryTitle}"></em>
+							</a>
+						</li>
+					</ul>
+					<div class="dpaging">
+						<th:block th:if="${!inqueryList1.empty}" th:each="page:${#numbers.sequence(startPage1, endPage1)}">
+							<a th:if="${page != nowPage1}"
+								th:href="@{/admin/report_admin(pageable1_page=${page - 1},searchKeyword1=${param.searchKeyword1})}"
+								th:text="${page}"></a>
+							<strong th:if="${page == nowPage1}" th:text="${page}" style="color:red"></strong>
+						</th:block>
+					</div>
+				</div>
+				<div class="list_top01">
+					<form name="key2">
+						<h1>상품 구매 환불 문의 &nbsp;
+							<div class="board_search" style="float: right; margin-right: 0px;">
+								<span class="word_input" style="margin-top:0;">
+									<input type="text" name="searchKeyword2">
+									<span class="btn">
+										<a href="#a" onclick="submitKey2()">
+											<img src="https://ssl.nexon.com/s2/game/maplestory/renewal/common/board_top_search_btn.png"
+												alt="">
+										</a>
+									</span>
+								</span>
+							</div>
+						</h1>
+					</form>
+					<ul class="gd_list_item" style="background-color: white;">
+						<h3 id="h33">
+							<div id="nick">아이디</div>
+							<div id="tititle">제목</div>
+						</h3>
+						<li th:each="inquery, state:${inqueryList2}">
+							<a th:href="@{/admin/report_view_admin(inquerySeq=${inquery.inquerySeq})}">
+								<div class="sup_writer">
+									<em th:if="${#strings.length(inquery.inqueryWriter)}>8" th:text="|${#strings.substring(inquery.inqueryWriter, 0, 5)}...|"></em>
+									<em th:unless="${#strings.length(inquery.inqueryWriter)}>8" th:text="${inquery.inqueryWriter}"></em>
+								</div>
+									<em th:if="${#strings.length(inquery.inqueryTitle)}>8" th:text="|${#strings.substring(inquery.inqueryTitle, 0, 7)}...|"></em>
+									<em th:unless="${#strings.length(inquery.inqueryTitle)}>8" th:text="${inquery.inqueryTitle}"></em>
+							</a>
+						</li>
+					</ul>
+					<div class="dpaging">
+						<th:block th:if="${!inqueryList2.empty}" th:each="page:${#numbers.sequence(startPage2, endPage2)}">
+							<a th:if="${page != nowPage2}"
+								th:href="@{/admin/report_admin(pageable2_page = ${page - 1},searchKeyword2=${param.searchKeyword2})}"
+								th:text="${page}"></a>
+							<strong th:if="${page == nowPage2}" th:text="${page}" style="color:red"></strong>
+						</th:block>
+					</div>
+				</div>
+				<div class="list_top01">
+					<form name="key3">
+						<h1>신고 접수 문의 &nbsp;
+							<div class="board_search" style="float: right; margin-right: 0px;">
+								<span class="word_input" style="margin-top:0;">
+									<input type="text" name="searchKeyword3">
+									<span class="btn">
+										<a href="#a" onclick="submitKey3()">
+											<img src="https://ssl.nexon.com/s2/game/maplestory/renewal/common/board_top_search_btn.png" alt="">
+										</a>
+									</span>
+								</span>
+							</div>
+						</h1>
+					</form>
+					<ul class="gd_list_item" style="background-color: white;">
+						<h3 id="h33">
+							<div id="nick">아이디</div>
+							<div id="tititle">제목</div>
+						</h3>
+						<li th:each="report, state:${reportList}">
+							<a th:href="@{/admin/report_view_admin2(reportSeq=${report.reportSeq})}">
+								<div class="sup_writer">
+									<em th:if="${#strings.length(report.reportWriter)}>8" th:text="|${#strings.substring(report.reportWriter, 0, 5)}...|"></em>
+									<em th:unless="${#strings.length(report.reportWriter)}>8" th:text="${report.reportWriter}"></em>
+								</div>
+									<em th:if="${#strings.length(report.reportTitle)}>8" th:text="|${#strings.substring(report.reportTitle, 0, 7)}...|"></em>
+									<em th:unless="${#strings.length(report.reportTitle)}>8" th:text="${report.reportTitle}"></em>
+							</a>
+						</li>
+					</ul>
+					<div class="dpaging">
+						<th:block th:if="${!reportList.empty}" th:each="page:${#numbers.sequence(startPage3, endPage3)}">
+							<a th:if="${page != nowPage3}"
+								th:href="@{/admin/report_admin(pageable3_page = ${page - 1},searchKeyword3=${param.searchKeyword3})}"
+								th:text="${page}"></a>
+							<strong th:if="${page == nowPage3}" th:text="${page}" style="color:red"></strong>
+						</th:block>
+					</div>
+				</div>
+			</div>
+			<!-- notice end -->
+		</div>
+	</div>
+	<!-- container end -->
+	<!-- footer str -->
+	<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+
+</html>

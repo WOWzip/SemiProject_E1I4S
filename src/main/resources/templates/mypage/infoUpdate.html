@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+
+
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
+
+<link rel="stylesheet" type="text/css" href="/css/join.css">
+<script type="text/javascript" src="/js/mypage.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+	function execDaumPostcode() {
+		new daum.Postcode({
+			oncomplete: function (data) {
+				// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+				// 각 주소의 노출 규칙에 따라 주소를 조합한다.
+				// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+				var addr = ''; // 주소 변수
+				var extraAddr = ''; // 참고항목 변수
+
+				//사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+				if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+					addr = data.roadAddress;
+				} else { // 사용자가 지번 주소를 선택했을 경우(J)
+					addr = data.jibunAddress;
+				}
+
+				// 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+				if (data.userSelectedType === 'R') {
+					// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+					// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+					if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+						extraAddr += data.bname;
+					}
+					// 건물명이 있고, 공동주택일 경우 추가한다.
+					if (data.buildingName !== '' && data.apartment === 'Y') {
+						extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+					}
+					// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+					if (extraAddr !== '') {
+						extraAddr = ' (' + extraAddr + ')';
+					}
+					// 조합된 참고항목을 해당 필드에 넣는다.
+					document.getElementById("extraAddress").value = extraAddr;
+
+				} else {
+					document.getElementById("extraAddress").value = '';
+				}
+
+				// 우편번호와 주소 정보를 해당 필드에 넣는다.
+				document.getElementById('postcode').value = data.zonecode;
+				document.getElementById("address").value = addr;
+				// 커서를 상세주소 필드로 이동한다.
+				document.getElementById("detailAddress").focus();
+
+			}
+		}).open();
+	}
+
+	function changePhoneNumber() {
+		$("#phoneNumber").attr("readonly", false);
+		$("#phoneNumber").css("background-color", "white");
+		$("#phoneNumber").val("");
+		$("#changePhoneNumber1").css("display", "none")
+		$("#changePhoneNumber1").attr("disabled", true);
+		$("#checkPhoneNumber1").css("display", "inline-block");
+		$("#checkPhoneNumber1").attr("disabled", false);
+		$("#resetPhoneNumber2").css("display", "inline-block");	// 취소버튼
+		$("#resetPhoneNumber2").attr("disabled", false);
+	}
+
+	function checkPhoneNumber() {
+		var phoneNumber = $('#phoneNumber').val();
+		const regPhoneNumber = new RegExp(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/);
+
+		console.log($('#phoneNumber').val());
+
+		if ($('#phoneNumber').val() == "") {
+			alert("전화번호를 입력하세요~");
+			$('#phoneNumber').focus();
+			return;
+		} else if (regPhoneNumber.test($('#phoneNumber').val()) != true) {
+			alert("정확한 번호를 입력해 주세요")
+			$('#phoneNumber').focus();
+			return;
+		}
+
+		console.log(phoneNumber);
+
+		$.ajax({
+			url: "checkPhoneNumber",
+			type: 'post',
+			data: {
+				"phoneNumber": phoneNumber
+			},
+			success: function (data) {
+				console.log(data);
+				if (data != null) {
+					if (data.result === 'YES') {
+						console.log(data);
+						if (confirm("사용 가능한 번호입니다. \n사용하시겠습니까?")) {
+							$("#phoneNumber").attr("readonly", true);
+							$("#phoneNumber").css("background-color", "gainsboro");
+							$("#checkPhoneNumber1").attr("disabled", true);		// 중복체크
+							$("#checkPhoneNumber1").css("display", "none");
+							$("#resetPhoneNumber1").attr("disabled", false);		// 다시작성
+							$("#resetPhoneNumber1").css("display", "inline-block");
+							$("#resetPhoneNumber2").css("display", "inline-block");	// 취소버튼
+							$("#resetPhoneNumber2").attr("disabled", false);
+						}
+						return false;
+					} else {
+						console.log(data);
+						console.log("다름");
+						alert("있는 번호");
+						$("#phoneNumber").focus();
+					}
+				}
+
+			},
+			error: function () {
+				alert("error");
+			}
+		});
+	}
+
+	function resetPhoneNumber() {
+		$("#phoneNumber").attr("readonly", false);
+		$("#phoneNumber").css("background-color", "white");
+		$("#checkPhoneNumber1").attr("disabled", false);
+		$("#checkPhoneNumber1").css("display", "inline-block");
+		$("#resetPhoneNumber1").attr("disabled", true);
+		$("#resetPhoneNumber1").css("display", "none");
+	}
+
+
+	function cancelPhoneNumber() {
+		const prePhoneNumber = $('#prePhoneNumber').val();
+		$("#phoneNumber").attr("readonly", true);
+		$("#phoneNumber").css("background-color", "gainsboro");
+		$("#phoneNumber").val(prePhoneNumber);
+		$("#changePhoneNumber1").css("display", "inline-block")
+		$("#changePhoneNumber1").attr("disabled", false);
+		$("#checkPhoneNumber1").css("display", "none");
+		$("#checkPhoneNumber1").attr("disabled", true);
+		$("#resetPhoneNumber2").css("display", "none");	// 취소버튼
+		$("#resetPhoneNumber2").attr("disabled", true);
+
+	}
+
+</script>
+
+
+<body>
+	<div id="wrap">
+		<div class="infoUpdate_container">
+			<div class="informationInput">
+				<h2>정보 수정</h2>
+			</div>
+			<form id="infoUpdateForm" name="infoUpdateForm" th:action="infoUpdateSuccess" method="post">
+				<input type="hidden" id="id" name="id" th:value="${member.id}">
+
+				<input type="hidden" id="password" name="password" th:value="${member.password}">
+
+				<input type="hidden" id="name" name="name" th:value="${member.name}">
+
+				<label for="nickName">Nickname:</label> <!-- 글자수만 제한 2~20 -->
+				<input type="text" id="nickName" name="nickName" th:value="${member.nickName}" required><br>
+
+				<label for="phoneNumber">Phone Number:</label>
+				<input type="tel" id="phoneNumber" name="phoneNumber" maxlength="11" th:value="${member.phoneNumber}"
+					readonly style="background-color: gainsboro" required><br>
+				<input class="" type="button" id="changePhoneNumber1" onclick="changePhoneNumber()" value="번호 변경" />
+				<input class="" type="button" id="checkPhoneNumber1" onclick="checkPhoneNumber()" style="display: none"
+					disabled value="중복 체크" />
+				<input class="" type="button" id="resetPhoneNumber1" onclick="resetPhoneNumber()" value="다시 입력"
+					style="display: none" disabled />
+				<input class="" type="button" id="resetPhoneNumber2" onclick="cancelPhoneNumber()" value="번호 변경 취소"
+					style="display: none" disabled />
+
+				<input type="hidden" id="prePhoneNumber" name="prePhoneNumber" maxlength="11"
+					th:value="${member.phoneNumber}" disabled />
+
+
+				<label for="email">Email:</label>
+				<input type="email" id="email" name="email" th:value="${member.email}" required>
+				<strong>@</strong>
+				<!-- 도메인 선택 구현-->
+				<input type="text" id="domain" name="domain" th:value="${member.domain}">
+				<select class="box" id="domain-list">
+					<option value="type">직접 입력</option>
+					<option value="naver.com">naver.com</option>
+					<option value="google.com">google.com</option>
+					<option value="hanmail.net">hanmail.net</option>
+					<option value="nate.com">nate.com</option>
+					<option value="kakao.com">kakao.com</option>
+				</select>
+
+				<script>
+
+					// 도메인 직접 입력 or domain option 선택
+					const domainListEl = document.querySelector('#domain-list')
+					const domainInputEl = document.querySelector('#domain')
+					// select 옵션 변경 시
+					domainListEl.addEventListener('change', (event) => {
+						// option에 있는 도메인 선택 시
+						if (event.target.value !== "type") {
+							// 선택한 도메인을 input에 입력하고 disabled
+							domainInputEl.value = event.target.value
+						} else { // 직접 입력 시
+							// input 내용 초기화 & 입력 가능하도록 변경
+							domainInputEl.value = ""
+						}
+					})
+				</script>
+
+				<label for="addrPre">주 소 :</label>
+				<input type="text" id="addrPre" th:value="${member.addr}" width="100px"><br>
+
+				<!-- https://postcode.map.daum.net/guide -->
+
+				<input type="text" id="postcode" placeholder="우편번호" value="">
+				<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+				<input type="text" id="address" placeholder="주소" value=""><br>
+				<input type="text" id="detailAddress" placeholder="상세주소" value="">
+				<input type="text" id="extraAddress" placeholder="참고항목" value=""><br>
+
+				<script>
+					window.onload = function () {
+						let addrPre = document.getElementById('addrPre').value;
+
+						console.log(addrPre);
+
+						let addrPre1 = addrPre.split('/', 4);
+
+
+						$("#postcode").val(addrPre1[0].trim());
+						$("#address").val(addrPre1[1].trim());
+						$("#detailAddress").val(addrPre1[2].trim());
+						$("#extraAddress").val(addrPre1[3].trim());
+					}
+
+					$(document).ready(function () {
+
+						function updateAddress() {
+							let addrPre = document.getElementById('addrPre').value;
+
+							console.log(addrPre);
+
+							let addrPre1 = addrPre.split('/', 4);
+
+
+							$("#postcode").val(addrPre1[0].trim());
+							$("#address").val(addrPre1[1].trim());
+							$("#detailAddress").val(addrPre1[2].trim());
+							$("#extraAddress").val(addrPre1[3].trim());
+						}
+
+						/*function updateCombinedAddress() {
+							let address1 = $('#postcode').val();
+							let address2 = $('#address').val();
+							let address3 = $('#detailAddress').val();
+							let address4 = $('#extraAddress').val();
+		
+							var combinedAddress = address1 + "/" + address2 + "/" + address3 + "/" + address4;
+							console.log();
+		
+							$("#addr").val(combinedAddress.trim());
+						}
+		
+						// Call the function when any of the input fields change
+						$('#postcode, #address, #detailAddress, #extraAddress').on('input', function () {
+							updateCombinedAddress();
+						});
+		
+						// Initial update on page load
+						updateCombinedAddress(); */
+					});
+
+				</script>
+
+				<input type="hidden" id="addr" name="addr">
+
+
+				<input type="hidden" id="point" name="point" th:value="${member.point}" />
+
+				<input type="hidden" id="totalPoint" name="totalPoint" th:value="${member.totalPoint}">
+
+				<input type="button" value="등록" onclick="checkInfoUpdate()" />
+				<input type="button" value="취소" onclick="location.href='/mypage/mypage'" />
+			</form>
+		</div>
+	</div>
+</body>
+<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+
+
+
+</html>

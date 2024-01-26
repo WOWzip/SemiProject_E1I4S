@@ -1,0 +1,494 @@
+@charset "UTF-8";
+
+
+.header {
+	overflow: hidden;
+	width: 100%;
+	height: 220px;
+	background: url(https://ssl.nexon.com/S2/membership/2011/home/bg_homeheader.gif) repeat-x left top;
+}
+
+.header .headerDeco {
+	width: 900px;
+	margin: 0 auto;
+	position: relative;
+}
+
+.header .headerNav {
+	overflow: hidden;
+	position: absolute;
+	top: 22px;
+	right: -10px;
+}
+
+.header .headerNav li {
+	float: left;
+	margin-left: -1px;
+	font-size: 13px;
+	padding: 0 8px 0 7px;
+	list-style: none;
+	background: transparent url(https://ssl.nexon.com/S2/membership/2011/global/set_bar.gif) no-repeat 0 -249px;
+}
+
+.header h1 {
+	position: absolute;
+	top: 32px;
+	left: 0;
+	width: 171px;
+	height: 34px;
+	padding: 16px 0 0 18px;
+}
+
+
+.wrapper {
+	display: block;
+}
+
+#contents {
+	clear: both;
+	width: 900px;
+	margin: 0 auto;
+}
+
+#contents h2 {
+	margin: 0;
+	padding: 0;
+}
+
+.topNav {
+	position: relative;
+	width: 950px;
+	height: 300px;
+	margin-bottom: 20px;
+}
+
+.topNav a {
+	width: 110px;
+	height: 13px;
+}
+
+.topNav a span {
+	visibility: visible;
+}
+
+.topNav h2 {
+	position: absolute;
+	top: 36px;
+	left: 0;
+}
+
+.topNav h2 a {
+	height: 24px;
+}
+
+.topNav ul {
+	position: absolute;
+	top: 74px;
+	left: 0;
+}
+
+.topNav ul li a {
+	vertical-align: top;
+	font-size: 1px;
+	margin-bottom: 9px;
+}
+
+.topNav .myPage {
+	left: 130px;
+}
+
+.topNav .security,.topNav .security2 {
+	left: 431px;
+}
+
+.topNav .nxCash {
+	left: 751px;
+}
+
+.topNav h2.security a {
+	width: 140px;
+}
+
+.topNav ul li a:hover {
+	background: url(https://ssl.nexon.com/S2/membership/2011/home/bg_homemenu2_3.gif) no-repeat left top;
+}
+
+.topNav .myPage1 a:hover {
+	background-position: -154px -301px;
+}
+
+.topNav .myPage2 a:hover {
+	background-position: -154px -323px;
+}
+
+.topNav .myPage3 a:hover {
+	background-position: -154px -345px;
+}
+
+.topNav .myPage4 a:hover {
+	background-position: -154px -367px;
+}
+
+.topNav .myPage5 a:hover {
+	background-position: -154px -389px;
+}
+
+.topNav .myPage6 a:hover {
+	background-position: -154px -411px;
+}
+
+.topNav .security1 a:hover {
+	background-position: -431px -301px;
+}
+
+.topNav .security2 a:hover {
+	background-position: -431px -323px;
+}
+
+.topNav .security3 a:hover {
+	background-position: -431px -345px;
+}
+
+.topNav .security4 a:hover {
+	background-position: -431px -367px;
+}
+
+.topNav .nxCash1 a:hover {
+	background-position: -751px -301px;
+}
+
+.topNav .nxCash2 a:hover {
+	background-position: -751px -323px;
+}
+
+.topNav .nxCash3 a:hover {
+	background-position: -751px -345px;
+}
+
+.topNav .nxCash4 a:hover {
+	background-position: -751px -367px;
+}
+
+.homeLogoutSec,
+.homeLoginSec,
+.homeMobildID {
+	clear: both;
+	width: 898px;
+	margin-bottom: 20px;
+	border: 1px solid #dae3fd;
+	background-color: #f4f9ff;
+}
+
+.homeLogoutSec {
+	clear: both;
+	padding: 13px 0 10px;
+	text-align: center;
+	font-size: 14px;
+}
+
+.homeLogoutSec span {
+	font-weight: bold;
+	color: #6f81f3;
+}
+
+.homeLogoutSec img {
+	vertical-align: middle;
+	margin: 0 0 3px 13px;
+}
+
+.homeLoginSec {
+	position: relative;
+	height: 206px;
+}
+
+.homeLoginSec p {
+	height: 32px;
+	padding-top: 17px;
+	text-indent: 25px;
+	font-size: 14px;
+	background: url(https://ssl.nexon.com/S2/membership/2011/home/bg_userinfo.gif) repeat-x left top;
+}
+
+.homeLoginSec p img {
+	vertical-align: middle;
+	margin-bottom: 5px;
+}
+
+.homeLoginSec p span {
+	font-size: 16px;
+	color: #000000;
+	font-weight: bold;
+}
+
+.homeLoginSec dt,
+.homeLoginSec dd {
+	position: absolute;
+}
+
+.homeLoginSec dd {
+	font-weight: bold;
+	color: #6f81f3;
+}
+
+.homeLoginSec .time,
+.homeLoginSec .pw {
+	top: 74px;
+	left: 25px;
+}
+
+.homeLoginSec dd.time,
+.homeLoginSec dd.cash {
+	top: 94px;
+}
+
+.homeLoginSec .pw {
+	top: 130px;
+}
+
+.homeLoginSec dd.pw,
+.homeLoginSec dd.cash2 {
+	top: 151px;
+}
+
+.homeLoginSec .cash,
+.homeLoginSec .cash2 {
+	top: 74px;
+	left: 310px;
+}
+
+.homeLoginSec .cash2 {
+	top: 130px;
+}
+
+.homeLoginSec dd.cash2 {
+	top: 151px;
+}
+
+.homeLoginSec .security {
+	top: 74px;
+	left: 609px;
+}
+
+.homeLoginSec dd.security {
+	top: 95px;
+}
+
+.homeLoginSec dd.security ul li {
+	padding-bottom: 6px;
+	text-indent: 6px;
+	background: url(https://ssl.nexon.com/S2/membership/2011/icon/bul_squ_bl.gif) no-repeat left 4px;
+}
+
+.homeLoginSec dd.security ul .none {
+	background: none;
+}
+
+.homeLoginSec dd.security ul {
+	float: left;
+	margin-right: 30px;
+}
+
+.homeMobildID {
+	height: 177px;
+	text-align: center;
+	font-weight: bold;
+	line-height: 1.6;
+}
+
+.homeMobildID .txt1 {
+	padding: 21px 0 11px;
+	font-size: 16px;
+	color: #000000;
+}
+
+.homeMobildID .txt1 strong,
+.homeMobildID .txt2 .date {
+	color: #6f81f3;
+}
+
+.homeMobildID .txt1 span {
+	display: block;
+	color: #666666;
+	font-size: 12px;
+	font-weight: normal;
+}
+
+.homeMobildID .txt2 {
+	padding-bottom: 14px;
+	font-size: 14px;
+}
+
+.homeQuickMenu {
+	overflow: hidden;
+	width: 900px;
+	height: 92px;
+	margin-bottom: 20px;
+	background: url(https://ssl.nexon.com/S2/membership/2011/home/bg_homemenu1_1.gif) no-repeat left top;
+}
+
+.homeQuickMenu li {
+	float: left;
+}
+
+.homeQuickMenu li a {
+	display: block;
+	width: 150px;
+	height: 92px;
+}
+
+.homeQuickMenu li a span {
+	visibility: hidden;
+}
+
+.homeFaqSec {
+	position: relative;
+	clear: both;
+	float: left;
+	width: 580px;
+	height: 163px;
+	margin-right: 20px;
+	border-top: 1px solid #e0e1e3;
+	border-bottom: 1px solid #e0e1e3;
+}
+
+.homeFaqSec h3 {
+	width: 101px;
+	height: 24px;
+	padding: 11px 0 0 20px;
+	border-bottom: 1px solid #e0e1e3;
+}
+
+.homeFaqSec .faqBest5 li h4 {
+	font-weight: normal;
+}
+
+.homeFaqSec .faqBest5 li h4 a {
+	position: absolute;
+	z-index: 100;
+	display: block;
+	top: 0;
+	left: 24px;
+	width: 97px;
+	height: 12px;
+	padding-top: 2px;
+	color: #000000;
+}
+
+.homeFaqSec .faqBest5 li.on h4 a {
+	font-weight: bold;
+	color: #6f81f3;
+	background: url(https://ssl.nexon.com/S2/membership/2011/home/bg_faqon.gif) no-repeat right top;
+}
+
+.homeFaqSec .faqBest5 .faqList1 h4 a {
+	top: 51px;
+}
+
+.homeFaqSec .faqBest5 .faqList2 h4 a {
+	top: 75px;
+}
+
+.faqBest5List {
+	position: absolute;
+	top: 0px;
+	left: 118px;
+	height: 163px;
+	padding-left: 23px;
+	background: url(https://ssl.nexon.com/S2/membership/2011/home/bg_faq.gif) no-repeat left top;
+}
+
+.faqBest5List p {
+	width: 439px;
+	height: 22px;
+	padding: 13px 0 0 0;
+	border-bottom: 1px solid #e0e1e3;
+}
+
+.faqBest5List .moreBt {
+	position: absolute;
+	top: 13px;
+	right: 10px;
+}
+
+.faqBest5List ol {
+	padding-top: 13px;
+	line-height: 1.2;
+}
+
+.faqBest5List ol li {
+	overflow: hidden;
+	width: 439px;
+	height: 8px;
+	margin-bottom: 3px;
+	padding: 3px 0 6px;
+	white-space: nowrap;
+	word-break: break-all;
+	text-overflow: ellipsis;
+}
+
+.faqBest5List ol li span {
+	display: inline-block;
+	background-color: #aeaeab;
+	font-size: 11px;
+	color: #ffffff;
+	padding: 2px 4px 0px 3px;
+}
+
+.faqBest5List ol li:hover span {
+	background-color: #787878;
+}
+
+.faqBest5List ol a:hover {
+	color: #333333;
+}
+
+.customerSec {
+	float: left;
+	height: 215px;
+}
+
+.customerSec img {
+	vertical-align: top;
+}
+
+.customerSec a {
+	display: block;
+	margin-bottom: 5px;
+}
+
+#footer {
+	margin-top: 20px;
+	background-color: #333;
+	color: #fff;
+	padding: 10px;
+	text-align: center;
+}
+
+.footer_info {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+	text-align: center;
+}
+
+.footer_info ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.footer_info li {
+	display: inline;
+	margin-right: 10px;
+}
+
+.footer_logo img {
+	width: 80px;
+}
+
+
+.copyright {
+	flex: 1;
+	text-align: right;
+}

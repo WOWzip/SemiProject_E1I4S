@@ -1,0 +1,17 @@
+/* form.css */
+
+/* 입력항목 */
+div.th {
+	width:100px;
+}
+
+
+/* 입력창 */
+.seal_tb2{
+	margin-bottom: 30px;
+}
+
+/* 버튼 */
+ .guide_btn_wrap {
+	margin-bottom: 30px;
+}

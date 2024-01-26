@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
+<link rel="stylesheet" href="/css/Guide.css" type="text/css" />
+<!-- header end -->
+<div class="mnb_wrap">
+	<div class="div_inner2">
+		<ul class="mnb_list">
+			<li class=active><a href="/guide/guide">기초 가이드</a></li>
+
+			<li class=active><a href="/guide/character">캐릭터 소개</a></li>
+
+		</ul>
+	</div>
+</div>
+<div class="mnb_blank"></div>
+<!-- container str -->
+<div id="container">
+	<!-- div_inner str -->
+	<div class="div_inner">
+		<!-- notice_wrap str -->
+		<div class="contents_wrap2">
+			<h1 class="con_title"> 기초 가이드
+				<!-- 등록버튼 (관리자세션이 있으면 버튼 생성).-->
+				<a sec:authorize="hasRole('ADMIN')" class="button_b" th:href="@{/guide/guideWriteForm}" th:text="등록" />
+			</h1>
+
+			<div class="main_wrap">
+				<div th:each="guide, state:${guideList}">
+					<!-- 가이드 제목 -->
+					<div class="form-group">
+						<h1 class="title" style="margin-top:20px; background-color: rgb(254, 211, 65);">
+							<span th:text="${guide.guideTitle}"></span>
+							<!-- 수정 및 삭제 버튼(관리자세션이 있으면 버튼 생성).-->
+							<a sec:authorize="hasRole('ADMIN')" class="button_b"
+								th:href="@{/guide/guideUpdateForm(guideNum=${guide.guideNum})}" th:text="수정" />
+							<a sec:authorize="hasRole('ADMIN')" class="button_b"
+								th:href="@{/guide/guideDelete(guideNum=${guide.guideNum})}" th:text="삭제" />
+						</h1>
+					</div>
+					<!-- 가이드 이미지 -->
+					<div class="form-group" >
+						<div>
+							<img class="guideImg" th:src="@{/guideImage/}+${guide.guideImageName}"/>
+						</div>
+					</div>
+					<!-- 가이드 내용 -->
+					<div class="form-group">
+						<div>
+							<pre th:text="${guide.guideContents}"></pre>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- notice end -->
+		</div>
+	</div>
+	<!-- container end -->
+	<!-- footer str -->
+	<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+
+</html>

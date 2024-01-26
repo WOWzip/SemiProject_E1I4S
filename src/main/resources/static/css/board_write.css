@@ -1,0 +1,66 @@
+@charset "UTF-8";
+
+
+#writeWrapper{
+	width: 830px;
+	padding-bottom: 300px;
+	margin: 0 auto; /*가운데 정렬*/
+}
+
+.con_title{
+	font-size: 34px;
+	color: #333;
+	margin-top: 50px;
+	width: 100%;
+    float: left;
+	margin-bottom: 40px;
+	height: 40px;
+}
+.sort_wrap {
+    float: right;
+    padding: 0 20px 0 10px;
+    font-size: 13px;
+    color: #333;
+    height: 38px;
+    line-height: 38px;
+    border: 1px solid #e3e3e3;
+    /* border-right: 0; */
+    margin-top: 16px;
+    margin-right: 10px;
+    background: url(https://ssl.nexon.com/s2/game/maplestory/renewal/common/search_down_bg.jpg) #fff right center no-repeat;
+    min-width: 67px;
+    position: relative;
+}
+
+table{
+	width: 820px;
+	background-color: white;
+}
+th{
+	width: 60px;
+	background-color: rgb(241, 219, 76);
+}
+td ,tr{
+	border: 1.2px solid rgb(196, 196, 196);
+}
+
+.button{
+	margin-top: 10px;
+	float: right;
+}
+
+.button_b{ 
+    text-align: right;
+    margin-top: 15px;
+    margin-right: 10px;
+	font-size:16px; 
+	color:#fff !important; 
+	text-align:center; 
+	background-color:#455d9d; 
+	border-radius:2px; 
+	padding:10px 14px 10px 14px; 
+	border:1px solid #455d9d;
+	line-height:1
+}
+
+.button_b:hover{background-color:#324b90; border:1px solid #324b90;}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
+<style>
+.seal_text_area {
+    width: 500%;
+}
+</style>
+<!-- header end -->
+<link rel="stylesheet" href="/css/form.css" type="text/css"> 
+<script type="text/javascript" src="/js/guide.js?v=2"></script>
+<div class="mnb_wrap">
+	<div class="div_inner2">
+		<!-- 기초 가이드/캐릭터 소개 tab -->
+		<ul class="mnb_list">
+			<li class=active><a href="/guide/guide">기초 가이드</a></li>
+			<li class=active><a href="/guide/character">캐릭터 소개</a></li>
+		</ul>
+	</div>
+</div>
+<div class="mnb_blank"></div>
+<!-- container str -->
+<div id="container">
+	<!-- div_inner str -->
+	<div class="div_inner">
+		<!-- notice_wrap str -->
+		<div class="contents_wrap2">
+			<form name="characterGuideInsertForm" action="/guide/characterInsert" method="post"
+				enctype="multipart/form-data">
+				<!--작성자 정보 세션으로 가져오기-->
+				<input type="hidden" id="characterGuideWriter" name="characterGuideWriter" th:value="${member.id}">
+				<h1 class="con_title">
+					캐릭터 등록
+				</h1>
+				<div class="seal_tb2" style="background-color: white;">
+					<!-- 캐릭터 이름 -->
+					<div class="seal_col">
+						<div class="th">이름</div>
+						<div class="td">
+							<input type="text" name="characterGuideName" class="seal_title"
+								placeholder="35자 이내로입력해 주세요." />
+						</div>
+					</div>
+					<!-- 캐릭터 이미지 -->
+					<div class="seal_col">
+						<div class="th">이미지</div>
+						<div class="td">
+							<input type="file" name="file" />
+							<span class="file_size">최대 파일용량 : 5MByte</span>
+						</div>
+					</div>
+					<!-- 캐릭터 소개(내용) -->
+					<div class="seal_col">
+						<div class="th title">소개</div>
+						<div class="td">
+							<textarea name="characterGuideContents" class="seal_text_area" id="characterGuideContents"
+								style="resize:none;"></textarea>
+						</div>
+					</div>
+				</div>
+				<!-- 확인 및 다시작성 버튼 -->
+				<div class="guide_btn_wrap">
+					<input class="btn03_g" type="button" value="확인" onclick="characterGuideInsert()">
+					<input class="btn03_b" type="reset" value="다시 작성">
+				</div>
+			</form>
+		</div>
+		<!-- notice_wrap end -->
+	</div>
+	<!-- div_inner end -->
+</div>
+<!-- container end -->
+<!-- footer str -->
+<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
+<!-- header end -->
+<!-- css, js -->
+<link rel="stylesheet" href="/css/event.css" type="text/css">
+<!--<link rel="stylesheet" href="https://lwres.nexon.com/css/maplestory/sub_new.css" type="text/css">-->
+<!-- css, js end -->
+
+<div class="mnb_wrap">
+	<div class="div_inner2">
+		<ul class="mnb_list">
+			<li class=active><a href="/news/notice">공지사항</a></li>
+			<li class=active><a href="/news/event">이벤트</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- container str -->
+<div id="container">
+	<!-- div_inner str -->
+	<div class="div_inner">
+		<!-- contents_wrap str -->
+		<div>
+			<h1 class="con_title">이벤트
+				<!-- 등록버튼 (관리자세션이 있으면 버튼 생성).-->
+				<a sec:authorize="hasRole('ADMIN')" class="button_a" th:href="@{/news/eventWriteForm}" th:text="등록" />
+			</h1>
+			<!-- 검색창 -->
+			<div class="rank_nav">
+				<!-- 검색타이틀 선택 -->
+				<!-- 검색창 + 검색버튼 -->
+				<form class="searchForm" name="searchForm" th:action="@{/news/event}" method="get"
+					style="float: right; margin-right: 0px;">
+					<select class="searchCode" type="text" name="searchCode" id="searchCode">
+						<option name="searchCode" value="title" selected>제목</option>
+						<option name="searchCode" value="contents">내용</option>
+						<option name="searchCode" value="titleContents">제목 및 내용</option>
+					</select>
+					<input class="searchKeyword" type="text" name="searchKeyword" placeholder="검색어 입력">
+					<input type="hidden" name="eventChoice" th:value="${param.eventChoice}">
+					<button type="submit"><img
+							src="https://ssl.nexon.com/s2/game/maplestory/renewal/common/board_top_search_btn.png"
+							alt=""></button>
+				</form>
+			</div>
+
+			<!--  진행중인 이벤트, 종료된 이벤트 선택 메뉴 -->
+			<div class="menu_1">
+				<ul>
+					<li>
+						<a th:href="@{/news/event(eventChoice=0)}">진행중인 이벤트</a>
+					</li>
+					<li>
+						<a th:href="@{/news/event(eventChoice=1)}">종료된 이벤트</a>
+					</li>
+				</ul>
+			</div>
+			<!-- 진행중인 이벤트 목록 -->
+			<div class="event_board"
+				th:if="${#strings.equals(param.eventChoice,'0') or #strings.isEmpty(param.eventChoice)} ">
+				<ul>
+					<li th:each="event, state:${proEventList}">
+						<div class="event_list_wrap">
+							<dl>
+								<!-- 이벤트 이미지 -->
+								<dt>
+									<a th:href="@{/news/eventView(eventSeq=${event.eventSeq})}">
+										<img th:src="@{/eventImage/}+${event.eventImageName}" alt="이벤트 섬네일"/>
+									</a>
+								</dt>
+								<dd class="data">
+									<p th:text="${event.eventTitle}" style="font-size: 25px;font-weight: bold;"></a>
+								</dd>
+								<dd class="date">
+									<p
+										th:text="${#dates.format(event.eventStartDate, 'yyyy-MM-dd')} + ' ~ ' + ${#dates.format(event.eventEndDate, 'yyyy-MM-dd')}" style="font-size: 20px; color: rgb(0, 128, 255);">
+									</p>
+									<!-- 수정 및 삭제 버튼 (관리자세션이 있으면 버튼 생성). -->
+									<a sec:authorize="hasRole('ADMIN')" class="button_a"
+										th:href="@{/news/eventUpdateForm(eventSeq=${event.eventSeq})}" th:text="수정" />
+									<a sec:authorize="hasRole('ADMIN')" class="button_a"
+										th:href="@{/news/eventDelete(eventSeq=${event.eventSeq})}" th:text="삭제" />
+								</dd>
+							</dl>
+						</div>
+					</li>
+				</ul>
+				<!-- 페이징 및 검색 처리 -->
+				<div class="page_num">
+					<th:block th:if="${!proEventList.empty}" th:each="page : ${#numbers.sequence(startPage2, endPage2)}">
+						<a th:if="${page != nowPage2}"
+							th:href="@{/news/event(page=${page - 1}, eventChoice=${param.eventChoice}, searchKeyword=${param.searchKeyword}, searchCode=${param.searchCode})}"
+							th:text="${page}"></a>
+						<strong th:if="${page == nowPage2}" th:text="${page}" style="color:red"></strong>
+					</th:block>
+				</div>
+				
+			</div>
+
+			<!-- 종료된 이벤트 목록 -->
+			<div class="event_board" th:if="${#strings.equals(param.eventChoice,'1')}">
+				<ul>
+					<li th:each="event, state:${endEventList}">
+						<div class="event_list_wrap">
+							<dl>
+								<!-- 이벤트 이미지 -->
+								<dt>
+									<a th:href="@{/news/eventView(eventSeq=${event.eventSeq})}">
+										<img th:src="@{/eventImage/}+${event.eventImageName}" alt="이벤트 섬네일" />
+									</a>
+								</dt>
+								<dd class="data">
+									<p th:text="${event.eventTitle}" style="font-size: 25px;font-weight: bold;"></a>
+								</dd>
+								<dd class="date">
+									<p
+										th:text="${#dates.format(event.eventStartDate, 'yyyy-MM-dd')} + ' ~ ' + ${#dates.format(event.eventEndDate, 'yyyy-MM-dd')}" style="font-size: 20px; color: rgb(225, 0, 255);">
+									</p>
+									<!-- 수정 및 삭제 버튼 (관리자세션이 있으면 버튼 생성). -->
+									<a sec:authorize="hasRole('ADMIN')" class="button_a"
+										th:href="@{/news/eventUpdateForm(eventSeq=${event.eventSeq})}" th:text="수정" />
+									<a sec:authorize="hasRole('ADMIN')" class="button_a"
+										th:href="@{/news/eventDelete(eventSeq=${event.eventSeq})}" th:text="삭제" />
+								</dd>
+							</dl>
+						</div>
+					</li>
+				</ul>
+				<!-- 페이징 및 검색 처리 -->
+				<div class="page_num">
+					<th:block th:if="${!endEventList.empty}" th:each="page : ${#numbers.sequence(startPage, endPage)}">
+						<a th:if="${page != nowPage}"
+							th:href="@{/news/event(page=${page - 1}, eventChoice=${param.eventChoice}, searchKeyword=${param.searchKeyword}, searchCode=${param.searchCode})}"
+							th:text="${page}"></a>
+						<strong th:if="${page == nowPage}" th:text="${page}" style="color:red"></strong>
+					</th:block>
+				</div>
+			</div>
+			<!-- event_board end -->
+		</div>
+		<!-- contents_wrap end -->
+	</div>
+	<!-- div_inner end -->
+</div>
+<!-- container end -->
+<!-- footer str -->
+<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+
+</html>
+
+</html>

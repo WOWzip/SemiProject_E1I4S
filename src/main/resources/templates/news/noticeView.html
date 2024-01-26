@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
+<!-- header end -->
+<link rel="stylesheet" href="/css/notice_view.css" type="text/css">
+<!-- 메뉴이동 : 공지사항, 이벤트 tab  -->
+<div class="mnb_wrap">
+	<div class="div_inner2">
+		<ul class="mnb_list">
+			<li class=active><a href="/news/notice">공지사항</a></li>
+			<li class=active><a href="/news/event">이벤트</a></li>
+		</ul>
+	</div>
+</div>
+<div class="mnb_blank"></div>
+<!-- container str -->
+<div id="container" >
+	<!-- div_inner str -->
+	<div class="div_inner">
+		<!-- notice_wrap str -->
+		<div class="notice_wrap" >
+			<h1 class="con_title">
+				공지사항
+				<span class="con_title_btn"><a href="/news/notice" class="back_btn"
+						style="width:56px; text-align:center;">목록</a></span>
+			</h1>
+			<!-- 공지사항 제목 -->
+			<p class="qs_title" style="margin-top:30px">
+				<em th:if="${notice.noticeChoice} eq 1" class="icon" style="width: 5%;"><img src="/img/news/notice.png"
+						alt="공지" style="max-width: 30px;" /></em>
+				<em th:if="${notice.noticeChoice} eq 2" class="icon" style="width: 5%;"><img src="/img/news/check.png"
+						alt="점검" style="max-width: 30px;" /></em>
+				<span th:text="${notice.noticeTitle}"></span>
+			</p>
+			<!-- 작성시간 -->
+			<div class="qs_info_wrap">
+				<div class="qs_info">
+					<p class="last"><img src="https://ssl.nexon.com/s2/game/maplestory/renewal/common/sub_date_new.png"
+							alt="작성 시간" th:text="${notice.noticeDate}" /></p>
+				</div>
+			</div>
+
+			<!-- 공지 이미지 및 내용 -->
+			<div class="qs_text">
+				<img th:if="${notice.noticeChoice} eq 1" src="/img/news/noticeb.png" alt="공지" />
+				<img th:if="${notice.noticeChoice} eq 2" src="/img/news/checkb.png" alt="점검" />
+				<p><pre th:text="${notice.noticeContents}"></pre></p>
+				<span class="se-drawing-object-wrapper se-image"
+					style="vertical-align: baseline; text-indent: 0px; display: inline-block;">
+					<img class="guideImg" th:src="@{/noticeImage/}+${notice.noticeImageName}"  onerror="this.style.display='none'"/>
+				</span>
+			</div>
+			<!-- 수정 및 삭제 버튼 -->
+			<!-- 관리자세션이 있으면 버튼 생성-->
+			<div th:if="${#strings.equals(member.role,'ROLE_ADMIN')}" class="button_view">
+				<a class="button_b" th:href="@{/news/noticeDelete(noticeSeq=${notice.noticeSeq})}" th:text="삭제" />
+				<a class="button_b" th:href="@{/news/noticeUpdateForm(noticeSeq=${notice.noticeSeq})}" th:text="수정" />
+				<a class="button_b" th:href="@{/news/noticeWriteForm}" th:text="등록" />
+			</div>
+		</div>
+		<!-- notice_wrap end -->
+	</div>
+	<!-- div_inner end -->
+</div>
+<!-- container end -->
+<!-- footer str -->
+<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+
+</html>

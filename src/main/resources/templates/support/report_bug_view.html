@@ -1,0 +1,76 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
+<!-- header end -->
+<style>
+	#answerA{
+		margin: 20px;
+		padding-left: 100px;
+	}
+</style>
+<div class="mnb_wrap">
+	<div class="div_inner2">
+		<ul class="mnb_list"><!-- 1:1 / 신고 tab -->
+			<li class=active><a href="/support/report_1_1"></span>1:1 문의</a></li>
+			<li class=active><a href="/support/report_bug">신고</a></li>
+			<li class=active><a href="/support/report_1_1_list">문의 내역</a></li>
+			<li class=active><a href="/support/report_bug_list">신고 내역</a></li>
+			<li class=active><a href="/support/report_result">완료 목록</a></li>
+		</ul>
+	</div>
+</div>
+<div class="mnb_blank"></div>
+<!-- container str -->
+<div id="container">
+	<!-- div_inner str -->
+	<div class="div_inner">
+		<!-- notice_wrap str -->
+		<div class="contents_wrap2">
+			<h1 class="con_title">
+				신고
+			</h1>
+			<div class="seal_tb2" style="background-color: white;">
+				<div class="seal_col">
+					<div class="th">문의 제목</div>
+					<div class="td">
+						<span class="file_size" th:text="${report.reportTitle}"></span>
+					</div>
+				</div>
+				<div class="seal_col">
+					<div class="th">문의 종류</div>
+					<div class="td">
+						<span th:if="${report.reportSelect}==1" class="file_size">욕설 신고</span>
+						<span th:if="${report.reportSelect}==2" class="file_size">부정거래 신고</span>
+					</div>
+				</div>
+				<div class="seal_col">
+					<div class="th">첨부이미지</div>
+					<div class="td">
+						<img th:src="@{/reportImgFolder/}+${report.file}" height="180px" width="auto">
+					</div>
+				</div>
+				<div class="seal_col">
+					<div class="th">내용</div>
+					<div class="td">
+						<span class="file_size" th:text="${report.reportContent}"></span>
+					</div>
+				</div>
+				<div class="seal_col">
+					<div class="th">답변</div>
+					<div id="answerA">
+					<b th:text="${report.reportAnswer}"></b>
+					</div>
+				</div>
+			</div>
+			<div class="bug_btn_wrap" th:align="right">
+				<input class="btn03_g" type="button" value="목록" onclick="location.href='/support/report_bug_list'">
+			</div>
+		</div>
+		<!-- notice_wrap end -->
+	</div>
+	<!-- div_inner end -->
+</div>
+<!-- container end -->
+<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+
+</html>

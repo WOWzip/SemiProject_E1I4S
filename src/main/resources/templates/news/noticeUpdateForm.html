@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
+<style>
+.seal_text_area {
+    width: 500%;
+}
+</style>
+<!-- header end -->
+<link rel="stylesheet" href="/css/form.css" type="text/css">
+<script type="text/javascript" src="/js/notice.js?v=2"></script>
+<!-- 메뉴이동 : 공지사항, 이벤트 tab -->
+<div class="mnb_wrap">
+	<div class="div_inner2">
+		<ul class="mnb_list">
+			<li class=active><a href="/news/notice">공지사항</a></li>
+			<li class=active><a href="/news/event">이벤트</a></li>
+		</ul>
+	</div>
+</div>
+<div class="mnb_blank"></div>
+<!-- container str -->
+<div id="container">
+	<!-- div_inner str -->
+	<div class="div_inner">
+		<!-- notice_wrap str -->
+		<div class="contents_wrap2">
+			<form th:action="@{/news/noticeUpdate}" name="noticeUpdateForm" method="post" enctype="multipart/form-data">
+				<input type="hidden" id="noticeSeq" name="noticeSeq" th:value="${notice.noticeSeq}"><!-- 공지 글번호 가져오기 -->
+				<h1 class="con_title">
+					공지사항 수정
+				</h1>
+				<div class="seal_tb2" style="background-color: white;">
+					<!--공지사항 종류 및 제목-->
+					<div class="seal_col">
+						<div class="th">공지 종류</div>
+						<div class="td">
+							<!-- 공지/점검 선택 -->
+							<!-- 공지 종류 선택 -->
+							<span class="sort_wrap2">
+								<a th:if="${notice.noticeChoice} eq 1" href="#a" class="cus_sel_a">공지</a>
+								<a th:if="${notice.noticeChoice} eq 2" href="#a" class="cus_sel_a">점검</a>
+								<ul style="display: none;">
+									<li><a href="#a">공지</a></li>
+									<li><a href="#a">점검</a></li>
+								</ul>
+								<select th:if="${notice.noticeChoice} eq 1" class="noticeChoice" type="text"
+									name="noticeChoice" id="noticeChoice">
+									<option value="1" selected>공지</option>
+									<option value="2">점검</option>
+								</select>
+								<select th:if="${notice.noticeChoice} eq 2" class="noticeChoice" type="text"
+									name="noticeChoice" id="noticeChoice">
+									<option value="1">공지</option>
+									<option value="2" selected>점검</option>
+								</select>
+							</span>
+					
+							
+							
+							<!--제목-->
+							<input type="text" name="noticeTitle" class="seal_title" th:value="${notice.noticeTitle}"
+								placeholder="35자 이내로입력해 주세요." />
+						</div>
+					</div>
+					<!-- 파일 첨부 -->
+					<div class="seal_col">
+						<div class="th">파일첨부</div>
+						<div class="td">
+							<input type="file" name="file">
+							<span class="file_size">최대 파일용량 : 5MByte</span>
+						</div>
+					</div>
+					<div class="seal_col">
+						<div class="th title">내용</div>
+						<div class="td">
+							<textarea class="seal_text_area" id="noticeContents" name="noticeContents"
+								th:text="${notice.noticeContents}"></textarea>
+						</div>
+					</div>
+				</div>
+				<div class="guide_btn_wrap">
+					<input class="btn03_g" type="button" value="확인" onclick="noticeUpdate()" />
+					<input class="btn03_b" type="reset" value="다시 작성">
+				</div>
+			</form>
+		</div>
+		<!-- notice_wrap end -->
+	</div>
+	<!-- div_inner end -->
+</div>
+<!-- container end -->
+<!-- footer str -->
+<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+
+</html>

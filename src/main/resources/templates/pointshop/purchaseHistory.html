@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
+<!--## 카테고리 목록 ## -->
+<div class="mnb_wrap">
+	<div class="div_inner2">
+		<ul class="mnb_list">
+			<li><a href="/pointshop/pointshop">포인트 상점</a></li>
+
+			<li><a href="/pointshop/purchaseHistory">구매내역</a></li>
+		</ul>
+	</div>
+</div>
+<!-- container str -->
+<link rel="stylesheet" href="/css/board.css" type="text/css" />
+<div id="container">
+	<!-- Contents : Str -->
+	<div class="div_inner">
+		<div class="contents_wrap2">
+			<div class="con_title">
+				<h1>구매내역</h1>
+			</div>
+			<form th:action="@{/pointshop/purchaseHistory}" method="get" style="float: right; margin-right: 0px;">
+
+				<input class="searchKeyword" type="text" name="searchKeyword" placeholder="검색어 입력">
+				<button type="submit"><img
+						src="https://ssl.nexon.com/s2/game/maplestory/renewal/common/board_top_search_btn.png"
+						alt=""></button>
+			</form>
+			<!--## 게시판 목록  ##-->
+			<div>
+				<table>
+					<thead>
+						<tr>
+							<th style="width:8%;">No</th>
+							<th style="width:20%;">ID</th>
+							<th style="width:17%;">닉네임</th>
+							<th style="width:15%;">구매상품</th>
+							<th style="width:10%;">구매수량</th>
+							<th style="width:10%;">상품포인트</th>
+							<th style="width:20%;">구매일자</th>
+						</tr>
+					</thead>
+					<tbody>
+
+						<tr th:each="history, status:${historyList}">
+							<td th:text="${status.count+(historyList.getNumber()*10)}"></td>
+							<td th:text="${history.userId}"></td>
+							<td th:text="${history.userNickName}"></td>
+							<td><a th:href="@{/pointshop/productHistory(historyNumber=${history.historyNumber})}"  th:text="${history.productName}"></a></td>
+							<td th:text="${history.productQuantity}"></td>
+							<td th:text="${history.productPoint}"></td>
+							<td th:text="${history.purchaseDate}"></td>
+						</tr>
+					</tbody>
+				</table>
+				<br />
+				<div class="page_num">
+					<th:block th:if="${!historyList.empty}" th:each="page : ${#numbers.sequence(startPage, endPage)}" >
+						<a th:if="${page != nowPage}"
+							th:href="@{/pointshop/purchaseHistory(page = ${page - 1},searchKeyword=${param.searchKeyword})}"
+							th:text="${page}"></a>
+						<strong th:if="${page == nowPage}" th:text="${page}" style="color:red"></strong>
+					</th:block>
+				</div>
+			</div>
+			<br /><br />
+		</div>
+	</div>
+	<!-- container end -->
+	<!-- footer str -->
+	<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+
+</html>

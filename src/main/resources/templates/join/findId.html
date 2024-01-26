@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
+
+<link rel="stylesheet" type="text/css" href="/css/join.css">
+
+<script>
+	function findId() {
+		var name = $('#name').val();
+		var socialSecuNum1 = $('#socialSecuNum1').val();
+		var socialSecuNum2 = $('#socialSecuNum2').val();
+		var socialSecuNum = socialSecuNum1 + socialSecuNum2;
+		var phoneNumber = $('#phoneNumber').val();
+		console.log(name);
+		console.log(socialSecuNum);
+		console.log(phoneNumber);
+		$.ajax({
+			url: "findIdForNumAndPhone",
+			type: 'post',
+			dataType: "json",
+			data: {
+				"name": name,
+				"socialSecuNum": socialSecuNum,
+				"phoneNumber": phoneNumber
+			},
+			success: function (data) {
+				alert(data.msg);
+			},
+			error: function () {
+				console("실패");
+			}
+		});
+	}
+
+
+
+</script>
+
+<body>
+	<div id="wrap">
+		<div class="find_container">
+			<div class="informationInput">
+				<h2>아이디 찾기</h2>
+			</div>
+			<form action="/join/findId" method="post" name="findIdForm">
+				<label for="name">이름 :</label>
+				<input type="text" id="name" name="name" required />
+				<br />
+				<label for="socialSecuNum">주민번호 :</label>
+				<input type="text" id="socialSecuNum1" name="socialSecuNum1" size="7" maxlength="6" required />
+				<strong>-</strong>
+				<input type="password" id="socialSecuNum2" name="socialSecuNum2" maxlength="7" required />
+				<br />
+				<label for="email">전화번호 :</label>
+				<input type="tel" id="phoneNumber" th:name="phoneNumber" maxlength="11" /><br>
+				<br />
+				<input type="button" value="확인" onclick="findId()">
+				<input type="button" value="비밀번호 찾기" onclick="location.href='/join/findPw'">
+				<input type="button" value="메인페이지" onclick="location.href='/'">
+
+			</form>
+		</div>
+		<!-- section -->
+
+	</div>
+</body>
+
+<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+
+</html>

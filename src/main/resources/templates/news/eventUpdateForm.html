@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
+<style>
+.seal_text_area {
+    width: 500%;
+}
+</style>
+<!-- header end -->
+<!-- css, js -->
+<link rel="stylesheet" href="/css/form.css" type="text/css"> 
+<script type="text/javascript" src="/js/event.js?v=2"></script>
+<!-- css, js end -->
+
+<!-- 메뉴이동 : 공지사항, 이벤트 tab -->
+<div class="mnb_wrap">
+	<div class="div_inner2">
+		<ul class="mnb_list">
+			<li class=active><a href="/news/notice">공지사항</a></li>
+			<li class=active><a href="/news/event">이벤트</a></li>
+		</ul>
+	</div>
+</div>
+<div class="mnb_blank"></div>
+<!-- container str -->
+<div id="container">
+	<!-- div_inner str -->
+	<div class="div_inner">
+		<!-- notice_wrap str -->
+		<div class="contents_wrap2">
+			<form th:action="@{/news/eventUpdate}" name="eventUpdateForm" method="post" enctype="multipart/form-data">
+				<input type="hidden" id="eventSeq" name="eventSeq" th:value="${event.eventSeq}"><!-- 이벤트번호 가져오기 -->
+				<h1 class="con_title">
+					이벤트 수정
+				</h1>
+				<div class="seal_tb2" style="background-color: white;"> 
+					<div class="seal_col">
+						<div class="th">제목</div>
+						<div class="td">
+							<input type="text" name="eventTitle" class="seal_title" th:value="${event.eventTitle}"
+								placeholder="35자 이내로입력해 주세요." /><!--이벤트 제목-->
+						</div>
+					</div>
+					<div class="seal_col">
+						<div class="th">이벤트 기간</div>
+						<div class="td">
+							<input type="date" id="startDate" name="eventStartDate" th:value="${#dates.format(event.eventStartDate, 'yyyy-MM-dd')}"/>
+							<input type="date" id="endDate" name="eventEndDate" th:value="${#dates.format(event.eventEndDate, 'yyyy-MM-dd')}"/>
+						</div>
+					</div>
+					<div class="seal_col">
+						<div class="th">썸네일</div>
+						<div class="td">
+							<input type="file" name="file" />
+							<span class="file_size">최대 파일용량 : 5MByte</span>
+						</div>
+					</div>
+					<div class="seal_col">
+						<div class="th">상세 이미지</div>
+						<div class="td">
+							<input type="file" name="file2"/>
+							<span class="file_size">최대 파일용량 : 5MByte</span>
+						</div>
+					</div>
+					<div class="seal_col">
+						<div class="th title">내용</div>
+						<div class="td">
+							<textarea name="eventContents" class="seal_text_area" id="eventContents"
+								th:text="${event.eventContents}" style="resize:none;"></textarea><!--내용-->
+						</div>
+					</div>
+				</div>
+				<div class="guide_btn_wrap">
+					<input class="btn03_g" type="button" value="확인" onclick="eventUpdate()" />
+					<input class="btn03_b" type="reset" value="다시 작성">
+				</div>
+			</form>
+		</div>
+		<!-- notice_wrap end -->
+	</div>
+	<!-- div_inner end -->
+</div>
+<!-- container end -->
+<!-- footer str -->
+<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+
+</html>

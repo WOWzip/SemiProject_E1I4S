@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
+<link rel="stylesheet" href="/css/character_view.css" type="text/css" />
+<!-- header end -->
+<div class="mnb_wrap">
+	<div class="div_inner2">
+		<ul class="mnb_list">
+			<li class=active><a href="/guide/guide">기초 가이드</a></li>
+			<li class=active><a href="/guide/character">캐릭터 소개</a></li>
+		</ul>
+	</div>
+</div>
+<div class="mnb_blank"></div>
+<!-- container str -->
+<div id="container">
+	<!-- div_inner str -->
+	<div class="div_inner">
+		<!-- contents_wrap2 str -->
+		<div class="contents_wrap2">
+			<h1 class="con_title">
+				캐릭터 소개
+			</h1>
+			<div class="char_view">
+				<span class="char_view_img">
+					<img th:src="@{/characterImage/}+${characterGuide.characterGuideImageName}" alt="">
+				</span>
+				<!-- 캐릭터 이름 -->
+				<h2 th:text="${characterGuide.characterGuideName}"></h2>
+				<h3></h3>
+				<!-- 캐릭터 설명 -->
+				<p class="char_v_txt" th:text="${characterGuide.characterGuideContents}"></p>
+
+				<!-- 등록/수정/삭제 버튼(관리자세션이 있으면 버튼 생성).-->
+				<div sec:authorize="hasRole('ADMIN')" class="button_view">
+					<a class="button_b"
+						th:href="@{/guide/characterDelete(characterGuideNum=${characterGuide.characterGuideNum})}"
+						th:text="삭제" />
+					<a class="button_b"
+						th:href="@{/guide/characterUpdateForm(characterGuideNum=${characterGuide.characterGuideNum})}"
+						th:text="수정" />
+					<a class="button_b" th:href="@{/guide/characterWriteForm}" th:text="등록" />
+				</div>
+			</div>
+		</div>
+		<!-- contents_wrap2 end -->
+	</div>
+	<!-- div_inner end -->
+</div>
+<!-- container end -->
+<!-- footer str -->
+<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+
+</html>

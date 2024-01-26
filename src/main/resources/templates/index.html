@@ -1,0 +1,332 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="description" content="새로운 개념의 멀티유저 온라인게임 maplestory">
+	<meta name="google-site-verification" content="OcUfX8Czn819CkCyhhvEaC0zGZCSyoGPgmk70ORTptI" />
+	<meta property="og:description" content="새로운 개념의 멀티유저 온라인게임 maplestory">
+	<meta name="keywords" content="maple, maplestory, 메이플, 메이플스토리, wizet, 위젯, 2d, 횡스크롤, 사이드스크롤, rpg, mmorpg, 온라인게임,이벤트,신규직업">
+	<meta name="author" content="NEXON Korea" />
+	<title>E1I4S</title>
+	<link rel="stylesheet" href="/css/ProjectJs_1.css" type="text/css" />
+	<link rel="stylesheet" href="/css/ProjectJs_2.css" type="text/css" />
+	<script src="https://ssl.nexon.com/s1/p2/ps.min.js" charset="utf-8" data-name="PS" data-ngm="true" data-nxlogin="true"></script>
+	<script src="https://lwres.nexon.com/js/maplestory/jquery-1.12.4.min.js" type="text/javascript"></script>
+	<script src="https://lwres.nexon.com/js/maplestory/jquery-ui.js"></script>
+	<script src="https://lwres.nexon.com/js/maplestory/index.js" type="text/javascript"></script>
+	<script src="https://lwres.nexon.com/js/maplestory/jquery.mCustomScrollbar.concat.min.js" type="text/javascript"></script>
+</head>
+<style>
+	body {
+		background: #f2f2f2;
+	}
+	.top_menu a {
+			font-size: 30px;
+		}
+		.top_menu > li > ul > li {
+		    font-size: 16px; /* 기본 글꼴 크기 설정 */
+		}
+		
+		.top_menu > li > ul > li a {
+		    font-size: 18px; /* 키우고자 하는 글꼴 크기 설정 */
+		}
+</style>
+<body>
+	<script>
+		$(document).ready(function () {
+			$('.sel_login_btn a:eq(0)').bind('click', function (e) {
+				e.preventDefault();
+				LOGIN.changeID();
+			});
+			$('.sel_login_btn a:eq(1)').bind('click', function (e) {
+				e.preventDefault();
+				close_login_pop();
+			});
+		});
+	</script>
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+		function checkLogin() {
+			const member = '/*[[${member}]]*/';
+			if(member != null){
+				if(member.point >=20){
+					window.open('/game/game', '룰렛', "width=400, height=700, left=800, top=200");
+				} else {
+					alert("20point 이상 보유해야 이용 가능합니다.")
+				}
+			} else{
+				alert("로그인 후 이용 가능합니다.")
+			}
+		}   
+	$(document).ready(function () {
+		const member = '/*[[${member}]]*/';
+		let gender = "";
+		if(member != null){
+			const memberGenderNum = member.socialSecuNum;
+			console.log(memberGenderNum);
+			console.log(memberGenderNum.substr(6,1));
+			const genderNum = memberGenderNum.substr(6,1);
+			if(genderNum == 1 || genderNum == 3){
+				gender = "m";
+			} else if(genderNum == 2 || genderNum == 4){
+				gender = "w";
+			}
+		}
+		var h ="";
+		console.log(gender);
+		if(gender =='m'){
+			console.log("남자")
+			h = "<img src=/img/main/man.png/>"
+			$('.none_char_bg').html(h);
+		} else {
+			console.log("여자")
+			h = "<img src=/img/main/woman.png/>"
+			$('.none_char_bg').html(h);
+		}
+	});
+	    /*]]>*/
+	</script>
+	<div id="wrap">
+		<div id="section01">
+			<div class="top_menu_wrap">
+				<div class="div_inner">
+					<!--좌상단 이미지-->
+					<h1 class="logo"><a href="/"><img src="/img/logo3n.png" alt="" style="margin-top: 30px;"/></a></h1>
+					<ul class="top_menu"> <!-- 페이지 상단 경로-->
+						<li>
+							<a href="/news/notice">뉴스</a>
+							<ul>
+								<li><a href="/news/notice">공지사항</a></li>
+								<li><a href="/news/event">이벤트</a></li>
+							</ul>
+						</li>
+						<li>
+							<a href="/guide/guide">가이드</a>
+							<ul>
+								<li><a href="/guide/guide">기초 가이드</a></li>
+								<li><a href="/guide/character">캐릭터 소개</a></li>
+							</ul>
+						</li>
+						<li>
+							<a href="/rank/rank">랭킹</a>
+							<ul>
+								<li><a href="/rank/rank">랭킹</a></li>
+							</ul>
+						</li>
+						<li>
+							<a href="/board/board?boardChoice=0">커뮤니티</a>
+							<ul>
+								<li><a href="/board/board?boardChoice=0">자유게시판</a></li>
+								<li><a href="/board/board?boardChoice=1">거래 게시판</a></li>
+								<li><a href="/board/board?boardChoice=2">팁 OR 노하우</a></li>
+							</ul>
+						</li>
+						<li>
+							<a href="/pointshop/pointshop">포인트상점</a>
+							<ul>
+								<li><a href="/pointshop/pointshop">상품 목록 리스트</a></li> 
+								<li><a href="/pointshop/purchaseHistory">구매 내역</a></li> 
+							</ul>
+						</li>
+						<li>
+							<a href="/support/report_1_1">고객지원</a>
+							<ul>
+								<li><a href="/support/report_1_1">1:1문의</a></li>
+								<li><a href="/support/report_bug">신고</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="top_menu_bg">
+				<div class="div_inner"
+					style="background:url('https://ssl.nexon.com/s2/game/maplestory/renewal/common/top_menu_line.png') left top no-repeat;">
+				</div>
+			</div>
+			<div class="main_banner_wrap">
+				<ul class="main_banner">
+					<!-- 이벤트 반복문 -->
+					<li th:if="${!widEvent.empty}" th:each="event, state: ${widEvent}">
+						<div class="banner_img_con">
+							<div class="banner_img_wrap">
+								<a th:href="@{/news/eventView(eventSeq=${event.eventSeq})}" target="_blank">
+									<img th:src="'/eventImage/'+${event.eventImageName}" alt="" style="width: 30%; height: 50%; top:130px; left: 55%;"/> <!-- 배경 이미지-->
+								</a>
+							</div>
+						</div>
+						<div class="div_inner main_banner_size">
+							<a th:href="@{/news/eventView(eventSeq=${event.eventSeq})}" target="_blank">
+								<h2 th:text="${event.eventTitle}"></h2>
+								<p th:text="|이벤트 기간 : ${#dates.format(event.eventStartDate, 'yyyy-MM-dd (E) HH:mm')} 점검 후 ~ ${#dates.format(event.eventEndDate, 'yyyy-MM-dd (E) HH:mm')}|"></p>
+							</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<!-- pos_banner_wrap str -->
+			<div class="pos_banner_wrap">
+				<!-- div_inner str -->
+				<div class="div_inner">
+					<span class="prev_btn"><!-- 이벤트 이동 버튼(<,>) -->
+						<a href="#a" onclick="prev_btn()">
+							<img src="https://ssl.nexon.com/s2/game/maplestory/renewal/common/prev.png" alt="" />
+						</a>
+					</span>
+					<div class="pos_banner">
+						<div class="pos_move">
+							<!-- 반복문 추가 -->
+							<dl th:if="${!widEvent.empty}" th:each="event, state: ${widEvent}">
+								<dt><!--<h1 th:text="${event.eventImageName}"></h1>-->
+									<a href="#a" th:onclick="'pos_click(' + ${state.index} + ')'"> <!--이미지 클릭 시 이동-->
+										<img th:src="'/eventImage/'+${event.eventImageName}"
+											 style="width:100px;height:40px;" alt="" />
+										<span class=pos_line></span>
+									</a>
+								</dt>
+								<dd><a href="#a" th:onclick="'pos_click(' + ${state.index} + ')'" th:text="${event.eventTitle}"></a></dd> <!--이미지 내부 글 클릭 시 이동-->
+								<dd class="pos_on"></dd>
+							</dl>
+						</div>
+					</div>
+					<span class="next_btn"><!-- 이벤트 이동 버튼(<,>) -->
+						<a href="#a" onclick="next_btn()">
+							<img src="https://ssl.nexon.com/s2/game/maplestory/renewal/common/next.png" alt="" />
+						</a>
+					</span>
+					<div class="pos_count"><!--게임 시작 위 이벤트 숫자-->
+						<dl>
+							<dt>01</dt>
+							<dd class="pos_len">
+								<img src="https://ssl.nexon.com/s2/game/maplestory/renewal/common/slice.png" alt="" />
+							</dd>
+							<dd class="event_view_all">
+								<a href="#a" onclick="event_onoff()">
+									<img src="https://ssl.nexon.com/s2/game/maplestory/renewal/common/window.png" alt="" />
+								</a>
+							</dd>
+						</dl>
+					</div>
+				</div>
+				<!-- div_inner end -->
+			</div>
+			<!-- pos_banner_wrap end -->
+			</div>
+		</div>
+		<div id="section02" style="background-color:rgb(128, 128, 192);">
+			<div class="div_inner" >
+				<div class="rolling_event_wrap"> <!-- 게임시작 왼쪽 div -->
+					<dl>
+						<dt>
+							<a href="/news/event" target="_blank">
+								<img src="https://lwi.nexon.com/maplestory/banner/2023/1122/bn_update_231122_TH65406A5I6I7C5B.png" alt="" />
+							</a>
+						</dt>
+						<dd class="rolling_title">
+							<a href="/news/event" target="_blank">이벤트 정보센터</a> <!-- 주황 글씨 -->
+						</dd>
+					</dl>
+				</div>
+				<span class="game_start">
+					<div class="gm_str_main_wrap">
+						<a href="#" onclick="checkLogin()">
+							<img class="main_str_btn" src="https://ssl.nexon.com/s2/game/maplestory/renewal/common/mp_start_btn_main.png" alt="" />
+						</a>
+					</div>
+				</span>
+				<th:block sec:authorize="isAuthenticated()">
+				<div class="none_char_id" >
+					<span class="none_char_bg"><!-- 대표캐릭터 남여 구분 -->
+					</span>
+					<span th:text="${member.nickName}" class="none_char_id_text"></span>
+					<ul class="id_set_two">
+						<li><a th:href="@{/mypage/mypage}">마이페이지</a></li>
+						<li sec:authorize="hasRole('ADMIN')">
+							<a href="/admin/report_admin">관리자페이지</a>
+						</li>
+					</ul>
+					<dl class="full_button">
+						<dt><img src="https://ssl.nexon.com/s2/game/maplestory/renewal/common/cash.png" alt="캐시이미지" />
+						</dt>
+						<dd>내 보유 포인트<span th:text="${member.point}" class="data_numb"></span></dd>
+						<dd class="charge"><a href="/pointshop/pointshop" onclick="" style="color: white;">상점 바로가기</a></dd>
+					</dl>
+					<span class="logout"><a th:href="@{/logout}"><img
+								src="https://ssl.nexon.com/s2/game/maplestory/renewal/common/logout.png"
+								alt="로그아웃"></a></span>
+				</div>
+				</th:block>
+				<th:block sec:authorize="isAnonymous()">
+				<div class="login">
+					<span><a href="/login"><img src="/img/login.png" alt="" width="200px" height="130px"/></a></span>
+					<span><a href="join/joinAgree"><img src="/img/joinImg.png"  width="200px" height="130px"></a></span>
+				</div>
+				</th:block>
+			</div>
+		</div>
+		<!-- section03 str -->
+		<div id="main_board_sec">
+			<div class="div_inner">
+				<!--메인 캐시 배너-->
+				<div class="main_cash_bn">
+					<ul class="main_cash_con">
+						<li><a href="https://www.instagram.com/" target="_self"><img src="/img/main/yoon.png"
+									alt="" /></a></li>
+						<li><a href="https://www.instagram.com/" target="_self"><img src="/img/main/jang.png"
+									alt="" /></a></li>
+						<li><a href="https://www.instagram.com/" target="_self"><img src="/img/main/ho.png"
+									alt="" /></a></li>
+						<li><a href="https://www.instagram.com/" target="_self"><img src="/img/main/park.png"
+									alt="" /></a></li>
+						<li><a href="https://www.instagram.com/" target="_self"><img src="/img/main/yee.png"
+									alt=""/></a></li>
+					</ul>
+					<div class="main_dot_wrap">
+						<ul>
+							<li class="active"><a href="#a" onclick="m_pos_cash_bn(0)">1</a></li>
+							<li class=""><a href="#a" onclick="m_pos_cash_bn(1)">2</a></li>
+							<li class=""><a href="#a" onclick="m_pos_cash_bn(2)">3</a></li>
+							<li class=""><a href="#a" onclick="m_pos_cash_bn(3)">4</a></li>
+							<li class=""><a href="#a" onclick="m_pos_cash_bn(4)">5</a></li>
+						</ul>
+					</div>
+				</div>
+				<!--공지 리스트-->
+				<div class="client_update_wrap2">
+					<div class="client_update2">
+						<ul>
+							<li class="s" th:each="notice : ${recentNotice}">
+								<dl>
+									<dt class="" style="background-color: rgb(255, 128, 192);">공지</dt>
+									<dd class="title">
+										<a th:href="@{/news/noticeView(noticeSeq = ${notice.noticeSeq})}" target="_self" th:text="${notice.noticeTitle}"></a>
+									</dd>
+									<dd class="info"></dd>
+								</dl>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="client_update_wrap2">
+					<div class="client_update2">
+						<ul>
+							<li class="s" th:each="board : ${topReco}">
+								<dl>
+									<dt class="" style="background-color: rgb(255, 128, 192);">추천</dt>
+									<dd class="title">
+										<a th:href="@{/board/board_view(boardSeq=${board.boardSeq},boardChoice=${param.boardChoice}, page=${param.page}) }" 
+										target="_self"
+										th:text="|추천수 : ${board.boardRecommend} - ${board.boardTitle} |"></a>
+									</dd>
+									<dd class="info"></dd>
+								</dl>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="stick-ncc"></div>
+		<!-- footer str -->
+<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+</html>

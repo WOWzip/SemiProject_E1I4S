@@ -1,0 +1,48 @@
+<!-- replyModify.html -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>replyModify.html</title>
+</head>
+<!--## 댓글 수정 script ##-->
+<script type="text/javascript">
+	function replyModifyCheck() {
+		if (modiform.content.value == "") {
+			alert("내용을 입력해주세요");
+		} else {
+			modiform.submit();
+			alert("수정되었습니다.");
+			opener.parent.location.reload();
+		}
+	}
+	// ## 댓글 수정 창 닫기 ##
+	function replyModifyClose() {
+		window.close();
+		opener.parent.location.reload();
+	}
+</script>
+<body>
+	<form th:action="@{/board/replyModifyForm}" method="post" name="modiform">
+		<input type="hidden" id="replySeq" name="replySeq" th:value="${reply.replySeq}" />
+		<table>
+			<tr>
+				<td style="width: 50px;">작성자: </td>
+				<td th:text="${reply.nickName}">작성자 닉네임이 있을자리</td>
+			</tr>
+			<tr>
+				<td colspan="2"><textarea name="content" style="width: 400px; height: 150px;"
+						th:text="${reply.content}">기존에 쓴 댓글</textarea></td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="button" value="확인" onclick="replyModifyCheck()" />&nbsp;<input type="reset"
+						value="나가기" onclick="replyModifyClose()" /></td>
+			</tr>
+		</table>
+	</form>
+
+</body>
+
+</html>

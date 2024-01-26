@@ -1,0 +1,128 @@
+@charset "UTF-8";
+
+
+#writeWrapper{
+	width: 830px;
+	padding-bottom: 100px;
+	margin: 0 auto; /*가운데 정렬*/
+}
+
+.con_title{
+	font-size: 34px;
+	color: #333;
+	margin-top: 50px;
+	width: 100%;
+    float: left;
+	margin-bottom: 40px;
+	height: 40px;
+}
+
+table{
+	border: 1px solid rgb(131, 131, 131);
+	width: 820px;
+	background-color: white;
+}
+
+th{
+	background-color: rgb(241, 219, 76);
+}
+
+td ,tr{
+	border: 1px solid rgb(131, 131, 131);
+}
+
+.reco_button{
+	margin-top: 10px;
+	text-align: center;
+}
+
+.qs_empathy_wrap{
+	 margin-top: 15px;
+}
+
+.button{
+	margin-top: 10px;
+}
+
+.bt_write{
+    float: right;
+    text-align: right;
+    width: auto;
+    margin-top: 15px;
+    margin-right: 10px;
+}
+
+/*=================================================*/
+
+/*=================================================*/
+/* 댓글 css */
+
+.comments{
+	width: 830px;
+	padding-bottom: 20px;
+	margin: 0 auto; /*가운데 정렬*/
+	font-weight:bold;
+	font-size: 20px;
+}
+#content{
+	width: 830px;
+	height:80px;
+	border: 1.5px solid rgb(131, 131, 131);
+}
+#reply_content{
+	height:80px;
+}
+
+.comments_list{
+	width: 830px;
+	margin: 0 auto; /*가운데 정렬*/
+	margin-bottom: 100px;
+}
+
+#reply{
+	border-bottom:1px solid rgb(131, 131, 131);
+}
+
+.comments_title{
+	color: black;
+	background-color: rgb(241, 219, 76);
+	height: 30px;
+	margin-bottom: 5px;
+}
+.text_writer{
+	font-size: 12px;
+}
+
+.reply_b{
+	float: right;
+}
+.comments_update{
+	color: black;
+	font-size: 14px;
+}
+
+.comments_write_button{
+	font-size:14px; 
+	color:#fff !important; 
+	background-color:rgb(157, 155, 48); 
+	padding:8px 12px 8px 12px; 
+	border:1px solid rgb(157, 155, 48);
+	line-height: 1;
+	float: right;
+}
+
+.comments_write_button:hover{background-color:rgb(144, 119, 49); border:1px solid rgb(144, 119, 49);}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

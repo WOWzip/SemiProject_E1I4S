@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
+<!-- header end -->
+<div class="mnb_wrap">
+	<div class="div_inner2">
+		<ul class="mnb_list">
+			<li><a href="/pointshop/pointshop">포인트 상점</a></li>
+
+			<li><a href="/pointshop/purchaseHistory">구매내역</a></li>
+		</ul>
+	</div>
+</div>
+<!-- container str -->
+<div id="container">
+	<div class="div_inner">
+		<!-- Contents : Str -->
+		<div class="contents_wrap2">
+			<h1 class="con_title">
+				구매내역 상세 정보
+			</h1>
+			<!--직업 소개-->
+			<div class="char_view">
+				<span class="char_view_img" id="productImg"><img th:src="@{/productImage/}+${pointShop.productImage}"
+						alt="" style="width:300px" height="500px" ></span>
+				<em>상품명</em>
+				<h2 th:text="${history.productName}"></h2>
+				<h3></h3>
+				<ul class="stat">
+					<li>
+						<dl>
+							<dt>가격</dt>
+							<dd th:text="|${history.productPoint} point|"> point </dd>
+						</dl>
+					</li>
+					<li>
+						<dl>
+							<dt>수량</dt>
+							<dd th:text="|${history.productQuantity} 개|"></dd>
+						</dl>
+					</li>
+				<li>
+					<dl>
+						<dt>바코드</dt>
+						<dd><img src="/img/pointshop/barcode.png" alt="바코드" width="300" height="100" style="float: right;"></dd>
+					</dl>
+				</li>
+				</ul>
+			</div>
+			<div th:align="center">
+				<a th:href="@{/pointshop/purchaseHistory}">이전</a></button>
+			</div>
+			<br />
+		</div>
+		<br />
+		<br />
+	</div>
+</div>
+<!-- container end -->
+
+<!-- footer str -->
+<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+
+</html>

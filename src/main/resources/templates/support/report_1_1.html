@@ -1,0 +1,84 @@
+<!doctype html>
+<!-- 타임리프에서 헤더 푸터 사용하기 위해 html xmlns:th, xmlns:layout 작성 -->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"> 
+<!-- header -->
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
+<!-- 헤더 아래에 작은 페이지 이동 -->
+<style>
+   .seal_text_area {
+    width: 500%;
+}
+</style>
+<div class="mnb_wrap">
+	<div class="div_inner2">
+		<ul class="mnb_list"><!-- 1:1 / 신고 tab -->
+			<li class=active><a href="/support/report_1_1"></span>1:1 문의</a></li>
+			<li class=active><a href="/support/report_bug">신고</a></li>
+			<li class=active><a href="/support/report_1_1_list">문의 내역</a></li>
+			<li class=active><a href="/support/report_bug_list">신고 내역</a></li>
+			<li class=active><a href="/support/report_result">완료 목록</a></li>
+		</ul>
+	</div>
+</div>
+<div class="mnb_blank"></div>
+<!-- container str -->
+<div id="container">
+	<!-- div_inner str -->
+	<div class="div_inner">
+		<!-- notice_wrap str -->
+		<div class="contents_wrap2">
+			<!-- 파일 첨부하여 저장하기 위해 enctype="multipart/form-data" form 사용 -->
+			<form action="/support/inquerySubmit" method="post" enctype="multipart/form-data">
+				<!-- 작성자를 따로 적지 않아도 로그인한 회원 id가 자동으로 작성자에 들어감 -->
+				<input type="hidden" id="inqueryWriter" name="inqueryWriter" th:value="${member.id}" />
+				<h1 class="con_title">
+					1:1 문의
+				</h1>
+				<div class="seal_tb2" style="background-color: white;">
+					<div class="seal_col">
+						<div class="th">문의 종류</div>
+						<div class="td">
+							<span class="sort_wrap2">
+								<a href="#a" class="cus_sel_a">상품 관련 문의</a>
+								<ul>
+									<li><a href="#a">상품 관련 문의</a></li>
+									<li><a href="#a">1:1 문의</a></li>
+								</ul>
+								<select name="inquerySelect"> <!--문의 종류-->
+									<option value="2">상품 관련 문의</option>
+									<option value="1">1:1 문의</option>
+								</select>
+							</span>
+							<input type="text" name="inqueryTitle" class="seal_title"
+								placeholder="35자 이내로입력해 주세요." /><!--문의 제목-->
+						</div>
+					</div>
+					<div class="seal_col">
+						<div class="th">파일첨부</div>
+						<div class="td">
+							<input type="file" name="file">
+							<span class="file_size">최대 파일용량 : 5MByte</span>
+						</div>
+					</div>
+					<div class="seal_col">
+						<div class="th title">내용</div>
+						<div class="td">
+							<textarea class="seal_text_area" id="inqueryContent" name="inqueryContent"
+								style="resize:none;"></textarea><!--내용-->
+						</div>
+					</div>
+				</div>
+				<div class="bug_btn_wrap" th:align="right">
+					<input class="btn03_g" type="submit" value="확인">
+					<input class="btn03_b" type="reset" value="다시 작성">
+				</div>
+			</form>
+		</div>
+		<!-- notice_wrap end -->
+	</div>
+	<!-- div_inner end -->
+</div>
+<!-- container end -->
+<!-- footer -->
+<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+</html>

@@ -1,0 +1,52 @@
+/* news_notice.css */
+
+/* 공지사항 메뉴선택(전체/공지/점검) */
+.menu_1 {
+	width: 100%;
+	list-style-type: none;
+	 padding-left:0px; /* 좌측 여백 없애기 */
+	 display: flex;
+}
+
+.menu_1 > ul > li {
+	display: inline-block;
+}
+
+.menu_1 ul > li > a {
+	padding: 6px 18px;
+	text-decoration: none;
+	font-weight: bold;
+	color: #333;
+	background-color: paleturquoise;
+}
+
+.menu_1 ul > li > a:hover{
+	background-color: cornflowerblue;
+}
+
+.icon {
+	padding: 5px 0px 0px 0px; /* top right bottom left */
+}
+
+
+/***********************************************************************/
+
+
+/* 공지사항 목록 */
+table {
+	width: 100%;
+	text-align: center;
+}
+
+th {
+	background-color:darkgrey ;
+}
+
+th, td {
+	height: 35px;
+}
+
+.title {
+	text-align: left;
+}
+

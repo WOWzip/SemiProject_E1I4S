@@ -1,0 +1,51 @@
+<!-- news/replyModify.html -->
+<!-- 이벤트 댓글 수정 -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>replyModify.html</title>
+</head>
+<body>
+	<form th:action="@{/news/replyModifyForm}" method="post" name="modiform">
+		<input type="hidden" id="replyEventSeq" name="replyEventSeq" th:value="${replyEvent.replyEventSeq}"/>
+		<table>
+			<!-- 작성자 표시 -->
+			<tr>
+				<td style="width: 50px;">작성자: </td><td th:text="${replyEvent.nickName}">작성자 닉네임이 있을자리</td>
+			</tr>
+			<!-- 댓글 입력란 -->
+			<tr>
+				<td colspan="2"><textarea name="content" style="width: 400px; height: 150px;" th:text="${replyEvent.content}">기존에 쓴 댓글</textarea></td>
+			</tr>
+			<!-- 댓글 수정 '확인' 및 '나가기' 버튼 -->
+			<tr>
+				<td colspan="2"><input type="button" value="확인" onclick="replyModifyCheck()"/>&nbsp;<input type="reset" value="나가기" onclick="replyModifyClose()"/></td>
+			</tr>
+		</table>		
+	</form>
+	<!-- 댓글 수정 script -->
+	<script type="text/javascript">
+		// 댓글 수정폼에서 '확인' 버튼 누른 경우,
+		function replyModifyCheck(){
+			if(modiform.content.value ==""){
+				// 내용이 비어있을 때, 알림 표시
+				alert("내용을 입력해주세요");
+			} else {
+				modiform.submit();
+				// 입력한 내용을 제출하고, 알림 표시
+				alert("수정되었습니다.");
+				// 부모페이지를 새로고침
+				opener.parent.location.reload();
+			} 
+		}
+		// 댓글 수정폼에서 '나가기' 버튼 누른 경우,
+		function replyModifyClose(){
+			// 현재창 닫음
+			window.close();
+			// 부모페이지 새로고침
+			opener.parent.location.reload();
+		}
+	</script>
+</body>
+</html>

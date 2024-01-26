@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
+<!-- header end -->
+<div class="mnb_blank"></div>
+<!-- container str -->
+<div id="container">
+	<form method="get" action="/admin/answer3">
+	<!-- div_inner str -->
+	<div class="div_inner">
+		<!-- notice_wrap str -->
+		<div class="contents_wrap2">
+			<h1 class="con_title">
+				1:1 문의
+			</h1>
+			<div class="seal_tb2" style="background-color: white;">
+				<div class="seal_col">
+					<div class="th">접수자</div>
+					<div class="td">
+						<span class="file_size" th:text="${inquery.inqueryWriter}"></span>
+					</div>
+				</div>
+				<div class="seal_col">
+					<div class="th">문의 제목</div>
+					<div class="td">
+						<span class="file_size" th:text="${inquery.inqueryTitle}"></span>
+					</div>
+				</div>
+				<div class="seal_col">
+					<div class="th">문의 종류</div>
+					<div class="td">
+						<span th:if="${inquery.inquerySelect}==1" class="file_size">1:1 문의</span>
+						<span th:if="${inquery.inquerySelect}==2" class="file_size">상품관련 문의</span>
+					</div>
+				</div>
+				<div class="seal_col">
+					<div class="th">첨부이미지</div>
+					<div class="td" th:if="${not #strings.equals(inquery.file,'nan')}">
+						<img th:src="@{/inqueryImgFolder/}+${inquery.file}">
+					</div>
+					<div class="td" th:if="${#strings.equals(inquery.file,'nan')}">
+						<b>첨부된 파일이 없습니다.</b>
+					</div>
+				</div>
+				<div class="seal_col">
+					<div class="th">내용</div>
+					<div class="td">
+						<span class="file_size" th:text="${inquery.inqueryContent}"></span>
+					</div>
+				</div>
+				<div class="seal_col">
+					<div class="th">답변</div>
+					<div class="td">
+						
+							<br>
+							<span class="file_size"><textarea name="inqueryAnswer" style="resize: none; background-color: rgb(238, 238, 238);" cols="160" rows="5"></textarea></span>
+							<input type="hidden" name="inquerySeq" th:value="${inquery.inquerySeq}"/>
+					</div>
+				</div>
+			</div>
+			<div class="bug_btn_wrap" th:align="right">
+				<input class="btn03_g" type="submit" value="답변">
+				<input class="btn03_g" type="button" value="목록" onclick="location.href='/admin/report_admin'">
+				<input class="btn03_g" type="button" value="확인"
+					th:onclick="|location.href='@{/admin/answer1?inquerySeq=}${inquery.inquerySeq}'|">
+			</div>
+		</div>
+		</form>
+	</div>
+	<!-- container end -->
+
+	<!-- footer str -->
+	<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+
+</html>

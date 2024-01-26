@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
+<link rel="stylesheet" href="/css/board_write.css" type="text/css" />
+<!-- header end -->
+<!--## 게시글 카테고리 종류 ##-->
+<div class="mnb_wrap">
+	<div class="div_inner2">
+		<ul class="mnb_list">
+			<li><a href="/board/board?boardChoice=0">자유 게시판</a></li>
+			<li><a href="/board/board?boardChoice=1">거래 게시판</a></li>
+			<li><a href="/board/board?boardChoice=2">팁 & 노하우</a></li>
+		</ul>
+	</div>
+</div>
+<div id="container">
+<!--## 게시판 글쓰기 ##-->
+<div id="writeWrapper">
+	<div>
+		<h1 class="con_title">글 쓰기</h1>
+	</div>
+	<form th:action="board_write_form" name="board_write" id="board_write" class="write" method="post"
+		enctype="multipart/form-data">
+		<input type="hidden" name="boardUserId" th:value="${member.id}" />
+		<table>
+			<tr>
+				<th>제목</th>
+				<td>
+					<div>
+						<!--## 게사판 타이틀 선택 ##-->
+						<span class="sort_wrap" style="margin-top:0; float: left; background-color: white;">
+							<a href="#a" class="cus_sel_a">자유 게시판</a>
+							<ul style="display: none;">
+								<li><a href="#a">자유 게시판</a></li>
+								<li><a href="#a">거래 게시판</a></li>
+								<li><a href="#a">팁 & 노하우</a></li>
+								<!--## 관리자로 로그인하면 추가적으로 보임 ##-->
+								<li th:if="${#strings.equals(member.role, 'ROLE_ADMIN')}"><a href="#a">공지 사항</a></li>
+							</ul>
+							<select name="boardChoice"><!--## 게시판 종류 -->
+								<option value="0">자유 게시판</option>
+								<option value="1">거래 게시판</option>
+								<option value="2">팁 & 노하우</option>
+								<!--## 관리자로 로그인하면 추가적으로 보임 ##-->
+								<option th:if="${#strings.equals(member.role, 'ROLE_ADMIN')}" th:value="3">공지 사항
+								</option>
+							</select>
+						</span>
+						<input type="text" id="boardTitle" name="boardTitle" style="width: 550px; height: 38px; background-color: white;"
+							placeholder="제목을 입력해주세요." required />
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<div class="th">파일첨부</div>
+				</th>
+				<td>
+					<div class="td">
+						<input type="file" name="file">
+					</div>
+					<span class="file_size">최대 파일용량 : 5MByte</span>
+				</td>
+			<tr>
+			</tr>
+			<tr>
+				<th>내용</th>
+				<td>
+					<input type="text" id="boardContents" name="boardContents" style="width: 700px; height: 400px; background-color: white;"
+						placeholder="내용을 입력해주세요." required />
+				</td>
+			</tr>
+		</table>
+		<input type="hidden" name="boardChoice" th:value="${param.boardChoice}" />
+		<div class="button">
+			<input type="button" id="send" class="button_b" value="완료" /> &nbsp; 
+			<input type="button" class="button_b" th:onclick="'location.href=\''+@{/board/board(boardChoice=${param.boardChoice})}+'\''" value="취소" />  
+		</div>
+	</form>
+</div>
+<!--## 완료버튼 누르면 발생되는 function() ##-->
+<script type="text/javascript">
+	$(document).ready(function () {
+		$("#send").click(function () {
+
+			if ($("#boardTitle").val() == '') {
+				alert("제목을 입력해주세요");
+				return;
+			}
+			if ($("#boardContents").val() == '') {
+				alert("내용을 입력해주세요");
+				return;
+			}
+			$("#board_write").submit();
+		});
+	});
+</script>
+<!-- footer str -->
+<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+
+</html>

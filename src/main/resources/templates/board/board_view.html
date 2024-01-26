@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
+<link rel="stylesheet" href="/css/board_view.css" type="text/css" />
+<!-- header end -->
+<!--## 게시글 카테고리 종류 ##-->
+<div class="mnb_wrap">
+	<div class="div_inner2">
+		<ul class="mnb_list">
+			<li><a href="/board/board?boardChoice=0">자유 게시판</a></li>
+
+			<li><a href="/board/board?boardChoice=1">거래 게시판</a></li>
+
+			<li><a href="/board/board?boardChoice=2">팁 & 노하우</a></li>
+		</ul>
+	</div>
+</div><!--## 게시글 카테고리 종류 end ##-->
+<!-- 추천 ajax-->
+<script th:inline="javascript">
+	/*<![CDATA[*/
+	function recommendUp() {
+		var userId = /*[[${member.id}]]*/;
+		var boardSeq = /*[[${board.boardSeq}]]*/;
+		console.log(userId);
+		console.log(boardSeq);
+		$.ajax({
+			url: "recommendUp",
+			type: "post",
+			data: {
+				"userId": userId,
+				"boardSeq": boardSeq
+			},
+			success: function (data) {
+				alert(data.msg);
+				location.reload();
+			},
+			error: function () {
+				alert("error");
+			}
+		});
+	}
+	function recommendDown() {
+		var userId = /*[[${member.id}]]*/;
+		var boardSeq = /*[[${board.boardSeq}]]*/;
+		console.log(userId);
+		console.log(boardSeq);
+		$.ajax({
+			url: "recommendDown",
+			type: "post",
+			data: {
+				"userId": userId,
+				"boardSeq": boardSeq
+			},
+			success: function (data) {
+				alert(data.msg);
+				location.reload();
+			},
+			error: function () {
+				alert("error");
+			}
+		});
+	}
+		/*]]>*/
+</script>
+<!--## 게시판 게시글 상세페이지 글보기 ##-->
+<div id="container">
+<div id="writeWrapper">
+	<div class="con_title">
+		<td th:text="${board.boardTitle}"></td>
+	</div>
+	<table id="writeWrapper">
+		<tr style="height: 40px;">
+			<th th:text="작성자"></th>
+			<td style="width: 35%" th:text="${board.boardUserId}"> </td>
+
+			<th th:text="조회수"></th>
+			<td style="width: 8%" th:text="${board.boardViews}"></td>
+			<th th:text="추천수"></th>
+			<td>
+				<!-- 추천 이미지 -->
+				<a href="#" th:if="${checkRecommend} == 0" onclick="recommendDown()"><img src="/img/board/fullHeart.png"
+						style="width: 30px; height: 30px;" /></a>
+				<a href="#" th:if="${checkRecommend} == 1" onclick="recommendUp()"><img src="/img/board/emptyHeart.png"
+						style="width: 30px; height: 30px;" /></a>
+			</td>
+			<td style="width: 8%" th:text="${board.boardRecommend}"></td>
+			<th th:text="등록일자"></th>
+			<td style="width: 10%" th:text="${#dates.format(board.boardDate, 'yyyy-MM-dd')}"></td>
+		</tr>
+		<tr style="height: 40px;">
+			<th>첨부된 파일</th>
+			<td colspan="8">
+				<span th:if="${board.file}!='nan'"><img class="boardImage" th:src="@{/boardImage/}+${board.file}"
+						alt="" />
+			</td>
+		</tr>
+		<tr style="height: 400px;">
+			<th th:text="내용"></th>
+			<td colspan="8" th:text="${board.boardContents}"><input type="text" /></td>
+		</tr>
+	</table><!--## 게시판 게시글 상세페이지 글보기 end ##-->
+	<div class="button" th:if="${board.boardChoice}==3">
+		<!--## 게시글 목록 -> 기존에 있던 페이지,게시판으로 ! ##-->
+		<span class="bt_write"><a class="btn02_b" onclick="history.back()">뒤로</a></span>
+		<!--## 작성자에게만 보이게 설정 // 삭제, 수정 ##-->
+		<!--## 삭제 시 1페이지로 이동 ##-->
+		<span class="bt_write"><a class="btn02_b" th:if="${#strings.equals(member.role,'ROLE_ADMIN')}"
+				th:href="@{/board/board_delete(boardSeq=${board.boardSeq},boardChoice=${param.boardChoice})}">삭제</a></span>
+		<span class="bt_write"><a class="btn02_b" th:if="${#strings.equals(member.role,'ROLE_ADMIN')}"
+				th:href="@{/board/board_update(boardSeq=${board.boardSeq},boardChoice=${param.boardChoice},page=${param.page})}">수정</a></span>
+	</div>
+
+	<div class="button" th:unless="${board.boardChoice}==3">
+		<!--## 게시글 목록 -> 기존에 있던 페이지,게시판으로 ! ##-->
+		<span class="bt_write"><a class="btn02_b" onclick="history.back()">뒤로</a></span>
+		<!--## 작성자에게만 보이게 설정 // 삭제, 수정 ##-->
+		<!--## 삭제 시 1페이지로 이동 ##-->
+		<span class="bt_write"><a class="btn02_b"
+				th:if="${#strings.equals(member.role,'ROLE_ADMIN')} or ${member.id}==${board.boardUserId}"
+				th:href="@{/board/board_delete(boardSeq=${board.boardSeq},boardChoice=${param.boardChoice})}">삭제</a></span>
+		<span class="bt_write"><a class="btn02_b" th:if="${member.id}==${board.boardUserId}"
+				th:href="@{/board/board_update(boardSeq=${board.boardSeq},boardChoice=${param.boardChoice},page=${param.page})}">수정</a></span>
+	</div>
+</div>
+
+<!--## 댓글 작성란 ## -->
+<form th:action="replyForm" id="reply_write" name="reply_write" method="post" class="comments">
+	<div style="padding-bottom: 10px;">
+		댓글
+	</div>
+	<div style="margin-bottom: 10px; font-size: 17px; color: blue;">
+		<span th:text="${#lists.size(replyList)}"></span> <span style="color: black; font-size: 15px;"> 개의 댓글이 있습니다</span>
+	</div>
+	<div>
+		<ul class="comments_write_ul">
+			<li class="comments_write_li">
+				<input type="hidden" id="page" name="page" th:value="${param.page}" />
+				<input type="hidden" id="boardChoice" name="boardChoice" th:value="${param.boardChoice}" />
+				<input type="hidden" id="boardSeq" name="boardSeq" th:value="${board.boardSeq}" />
+				<input type="hidden" id="nickName" name="nickName" th:value="${member.nickName}" />
+				<textarea type="text" id="content" name="content" placeholder="내용을 입력해주세요."
+					style="resize: none;"></textarea>
+				<input type="button" id="commentsWrite" class="comments_write_button" value="등록" />
+			</li>
+		</ul>
+	</div>
+</form><!--## 댓글 작성란 end ## -->
+<br />
+<!--## 댓글 목록 ## -->
+<div>
+	<table class="comments_list">
+		<thead>
+			<th class="comments_title" colspan="5">댓글</th>
+		</thead>
+		<tbody>
+			<tr class="comments_contents" th:each="reply, status:${replyList}">
+				<td style="width: 8%;">작성자:</td>
+				<td style="width: 8%;" th:text="${reply.nickName}"></td>
+				<td id="reply_content" th:text="${reply.content}"></td>
+				<input type="hidden" name="replySeq" id="replySeq" th:value="${reply.replySeq}" />
+				<td style="width: 10%;">&nbsp;
+					<span>
+						<a class="comments_update" th:if="${reply.nickName}==${member.nickName}"
+							th:onclick="|window.open('/board/replyModify?replySeq=${reply.replySeq}','replyModifyForm', 'width=500,height=250')|">수정</a>
+					</span>
+					<span><a class="comments_update" th:if="${reply.nickName}==${member.nickName}"
+							th:href="@{/board/replyDelete(replySeq=${reply.replySeq}, boardChoice=${param.boardChoice}, page=${param.page})}">삭제</a></span>
+				</td>
+				<td style="width: 10%;" th:text="${#dates.format(reply.replyDate, 'yyyy-MM-dd')}">
+			</tr>
+		</tbody>
+	</table><!--## 댓글 목록 end ## -->
+</div>
+
+<!--## 등록버튼 누르면 발생되는 function() ##-->
+<script type="text/javascript">
+	$(document).ready(function () {
+		$("#commentsWrite").click(function () {
+
+			if ($("#content").val() == '') {
+				alert("내용을 입력해주세요");
+				return false;
+			}
+
+			$("#reply_write").submit();
+			alert("댓글이 등록되었습니다.");
+		});
+	});
+</script><!--## 등록버튼 누르면 발생되는 function() end##-->
+<!-- footer str -->
+<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+
+</html>

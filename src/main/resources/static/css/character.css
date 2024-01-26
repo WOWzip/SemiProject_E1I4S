@@ -1,0 +1,58 @@
+/* character.css */
+/* 캐릭터 목록 */
+@charset "UTF-8";
+
+div {
+    margin: 0;
+    padding: 0;
+    display: block;
+}
+
+.cha_list li {
+    position: relative;
+    float: left;
+    width: 384px;
+    height: 384px;
+    margin: 44px 0 0 44px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.char_info_list li {
+	margin-bottom: 10%;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+body {
+    font-size: 14px;
+}
+
+/* 버튼 */
+.button_b{ 
+	float: right;
+    text-align: right;
+    margin-top: 15px;
+    margin-right: 10px;
+	font-size:16px; 
+	color:#fff !important; 
+	text-align:center; 
+	background-color:#455d9d; 
+	border-radius:2px; 
+	padding:10px 14px 10px 14px; 
+	border:1px solid #455d9d;
+	display:block;
+	line-height:1
+}
+.button_b:hover{background-color:#324b90; border:1px solid #324b90;}
+
+/* 캐릭터 이미지 */
+.characterImg {
+	width: 100%;
+	height: 100%;
+    line-height: 1.3;
+    min-height: 36px;
+    background-color: #fff; /* 배경색 흰색으로 맞춤! */
+}

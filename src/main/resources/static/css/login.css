@@ -1,0 +1,382 @@
+@charset "UTF-8";
+
+.login-container {
+	width: 400px;
+	margin: 50px auto;
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-container h2 {
+	text-align: center;
+	color: #333;
+}
+
+label {
+	display: block;
+	margin-bottom: 8px;
+	font-weight: bold;
+}
+
+input {
+	width: 100%;
+	border: 1px solid black;
+	padding: 10px;
+	margin-bottom: 15px;
+	box-sizing: border-box;
+}
+
+input[type="button"] {
+	background-color: #333;
+	color: #fff;
+	cursor: pointer;
+}
+
+input[type="button"]:hover {
+	background-color: #555;
+}
+
+
+
+/* 페이징 관련 css */
+
+
+.logo img{ 
+	height: 100%;
+}
+.logo {
+    position: absolute;
+    top: 15px;
+    left: 40px;
+    z-index: 9999;
+    height: 83px;
+}
+
+#nick{
+	display: inline-block;
+	margin:10px;
+	margin-left: 35px;
+}	
+#tititle{
+	display: inline-block;
+	margin-left: 120px;
+}
+#h33{
+	border-bottom: 1px solid rgb(203, 207, 250);
+}
+button{border:0;cursor:pointer;overflow:visible;vertical-align:top;background:transparent;outline: none;}
+
+.skip-navigation-link {position: absolute;left: -99999%;text-decoration: none;}
+.skip-navigation-link:focus {display: block;left: 0;top: 0;z-index: 999999;  width: 100%;height: 30px;  line-height: 30px;background: #000;color: #fff;text-align: center;font-weight: bold;}
+*{margin:0; padding:0; list-style:none; border:0;text-decoration:none; font-family:"NanumBarunGothic" , "Malgun Gothic" , sans-serif; letter-spacing:-0.03em;}
+u{text-decoration:underline;}
+table{border-collapse:collapse; border-spacing:0;}
+input[type=password]{font-family:"Dotum","�뗭�",sans-serif;}
+.div_inner{position:relative; padding:0 40px; width:1200px; height:100%; margin:0 auto;}
+a {
+    text-decoration: none;
+    transition: color 0.3s ease;
+    -moz-transition: color 0.3s ease;
+    -o-transition: color 0.3s ease;
+    -webkit-transition: color 0.3s ease;
+}
+
+
+
+#wrap {
+	float: left;
+	width: 100%;
+	min-width: 1280px;
+	height: 100%;
+	overflow: hidden;
+}
+
+
+
+
+#header {
+	position: relative;
+	float: left;
+	width: 100%;
+	height: 310px;
+	background: url("https://lwi.nexon.com/maplestory/common/visual/sub_visual.jpg") center top no-repeat;
+}
+
+#header_news {
+	position: relative;
+	float: left;
+	width: 100%;
+	height: 310px;
+	background: url("https://lwi.nexon.com/maplestory/common/visual/sub_visual_news.jpg") center top no-repeat;
+}
+
+#header_guide {
+	position: relative;
+	float: left;
+	width: 100%;
+	height: 310px;
+	background: url("https://lwi.nexon.com/maplestory/common/visual/sub_visual_guide.jpg") center top no-repeat;
+}
+
+#header_ranking {
+	position: relative;
+	float: left;
+	width: 100%;
+	height: 310px;
+	background: url("https://lwi.nexon.com/maplestory/common/visual/sub_visual_ranking.jpg") center top no-repeat;
+}
+
+#header_community {
+	position: relative;
+	float: left;
+	width: 100%;
+	height: 310px;
+	background: url("https://lwi.nexon.com/maplestory/common/visual/sub_visual.jpg") center top no-repeat;
+}
+
+#header_media {
+	position: relative;
+	float: left;
+	width: 100%;
+	height: 310px;
+	background: url("https://lwi.nexon.com/maplestory/common/visual/sub_visual_media.jpg") center top no-repeat;
+}
+
+#header_support {
+	position: relative;
+	float: left;
+	width: 100%;
+	height: 310px;
+	background: url("https://lwi.nexon.com/maplestory/common/visual/sub_visual_cs.jpg") center top no-repeat;
+}
+
+#header_mymaple {
+	position: relative;
+	float: left;
+	width: 100%;
+	height: 310px;
+	background: url("https://ssl.nexon.com/s2/game/maplestory/renewal/common/sub_visual_mymaple.png") center top no-repeat;
+}
+
+#header_account {
+	position: relative;
+	float: left;
+	width: 100%;
+	height: 310px;
+	background: url("https://ssl.nexon.com/s2/game/maplestory/renewal/common/sub_visual_mymaple.png") center top no-repeat;
+}
+
+#header_common {
+	position: relative;
+	float: left;
+	width: 100%;
+	height: 310px;
+	background: url("https://ssl.nexon.com/s2/game/maplestory/renewal/common/sub_visual_tag.png") center top no-repeat;
+}
+
+#header_authentication {
+	position: relative;
+	float: left;
+	width: 100%;
+	height: 310px;
+	background: url("https://ssl.nexon.com/s2/game/maplestory/renewal/common/sub_visual_mymaple.png") center top no-repeat;
+}
+
+/*top_menu str */
+.top_menu_wrap {
+	width: 100%;
+	height: 100%;
+	float: left;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+.top_menu {
+	position: absolute;
+	top: 57px;
+	right: 5px;
+	z-index: 999;
+}
+
+.top_menu>li {
+	float: left;
+	position: relative;
+	text-align: center;
+	width: 173px;
+	height: 100%;
+	font-size: 22px;
+	font-weight: bold;
+}
+
+.top_menu>li a {
+	color: #fff;
+}
+
+.top_menu>li a:hover,
+.top_menu>li:hover>a {
+	color: #f68500 !important;
+}
+
+.top_menu>li>ul {
+	float: left;
+	width: 100%;
+	height: 100%;
+	margin-top: 28px;
+	display: none;
+}
+
+.top_menu>li>ul>li {
+	width: 100%;
+	height: 13px;
+	margin-top: 13px;
+	float: left;
+}
+
+.top_menu>li>ul>li:first-child {
+	margin-top: 0px;
+}
+
+.top_menu>li>ul>li a {
+	float: left;
+	width: 100%;
+	height: 100%;
+	font-size: 13px;
+	color: #a7acbc;
+}
+
+.top_menu>li>ul>li:hover a {
+	color: #f68500 !important;
+}
+
+.top_menu_bg {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 310px;
+	background-color: #2b2b37;
+	display: none;
+	z-index: 99;
+}
+
+.top_menu li a .icon_window {
+	width: 9px;
+	height: 9px;
+	margin: 3px 0 0 5px
+}
+
+.top_menu li a:hover>.icon_window {
+	background-position: -24px 0
+}
+
+/* top_menu end */
+
+.sub_banner_wrap {
+	position: absolute;
+	left: 50%;
+	top: 0;
+	width: auto;
+	height: 100%;
+	transform: translateX(-50%);
+}
+
+.sub_banner_wrap img {}
+
+
+.board_name {
+	position: relative;
+	float: left;
+	margin-top: 196px;
+	width: 100%;
+}
+
+.board_name h2 {
+	float: left;
+	margin-left: 15px;
+	font-size: 50px;
+	font-weight: normal;
+	color: #fff;
+	line-height: 60px;
+}
+
+.board_name span.sub_logo {
+	width: 60px;
+	height: 60px;
+	float: left;
+}
+
+
+.footer_logo a {
+	float: left;
+}
+
+.footer_logo a:first-child {
+	margin-top: 1px;
+	margin-right: 16px;
+}
+
+#footer {
+	float: left;
+	width: 100%;
+	height: 220px;
+	background: #2f3238;
+	position: relative;
+}
+
+.footer_info {
+	float: left;
+	margin-top: 46px;
+}
+
+.footer_info ul {
+	float: left;
+}
+
+.footer_info ul li {
+	float: left;
+	padding: 0 13px;
+	font-size: 12px;
+	background: url("https://ssl.nexon.com/s2/game/maplestory/renewal/common/footer_line.png") left center no-repeat;
+}
+
+.footer_info ul li:first-child {
+	padding-left: 0px;
+	background: none;
+}
+
+.footer_info ul li a {
+	color: #b1b3b9;
+}
+
+.footer_info p {
+	float: left;
+	line-height: 1.5;
+	margin-top: 21px;
+	font-size: 11px;
+	color: #b1b3b9;
+}
+
+.licensee {
+	text-decoration: underline;
+}
+
+.licensee a {
+	color: #b1b3b9;
+}
+
+.copyright {
+	float: left;
+	width: 100%;
+	margin-top: 3px;
+	font-size: 11px;
+	color: #888888;
+}
+
+.footer_logo {
+	float: left;
+	width: 100%;
+	margin-top: 17px;
+}

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
+<!-- header end -->
+<link rel="stylesheet" href="/css/notice.css" type="text/css">
+		<link rel="stylesheet" href="/css/news_notice.css" type="text/css">
+<div class="mnb_wrap">
+	<div class="div_inner2">
+		<ul class="mnb_list">
+			<li class=active><a href="/news/notice">공지사항</a></li>
+			<li class=active><a href="/news/event">이벤트</a></li>
+		</ul>
+	</div>
+</div>
+<div class="mnb_blank"></div>
+<!-- container str -->
+<div id="container">
+	<!-- div_inner str -->
+	<div class="div_inner">
+		<!-- notice_wrap str -->
+		<div>
+			<h1 class="con_title">공지사항
+				<!-- 등록버튼 (관리자세션이 있으면 등록 버튼 생성)-->
+				<a th:if="${#strings.equals(member.role,'ROLE_ADMIN')}" class="button_a"
+					th:href="@{/news/noticeWriteForm}" th:text="등록" />
+			</h1>
+			<!-- 검색창 -->
+			<div class="rank_nav">
+				<!-- 검색타이틀 선택 -->
+				<!-- 검색창 + 검색버튼 -->
+				<form class="searchForm" name="searchForm" th:action="@{/news/notice}" method="get"
+					style="float: right; margin-right: 0px;">
+					<select class="searchCode" type="text" name="searchCode" id="searchCode">
+						<option name="searchCode" value="title" selected>제목</option>
+						<option name="searchCode" value="contents">내용</option>
+					</select>
+					<input class="searchKeyword" type="text" name="searchKeyword" placeholder="검색어 입력">
+					<input type="hidden" name="noticeChoice" th:value="${param.noticeChoice}">
+					<button type="submit"><img
+							src="https://ssl.nexon.com/s2/game/maplestory/renewal/common/board_top_search_btn.png"
+							alt=""></button>
+				</form>
+			</div>
+			<!-- 제목, 공지, 점검 선택 메뉴 --> 
+			<div class="menu_1">
+				<ul>
+					<li>
+						<a href="/news/notice">전체</a>
+					</li>
+					<li>
+						<a th:href="@{/news/notice(noticeChoice=1)}">공지</a>
+					</li>
+					<li>
+						<a th:href="@{/news/notice(noticeChoice=2)}">점검</a>
+					</li>
+				</ul>
+			</div>
+			<!-- 공지글 목록 -->
+			<div class="news_board">
+				<table>
+					<thead>
+						<tr>
+							<th style="width: 20%;">No</th>
+							<th colspan="2" style="width: 40%;">제목</th>
+							<th style="width: 30%;">날짜</th>
+							<!-- 관리자만 볼 수 있게 하기 -->
+							<th th:if="${#strings.equals(member.role,'ROLE_ADMIN')}" colspan="2" style="width: 10%;">수정 및 삭제</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="notice, state:${noticeList}">
+							<!-- 글순서. 글 고유번호 아님 주의-->
+							<td th:text="${state.count+(noticeList.getNumber()*10)}"></td>
+							<td th:if="${notice.noticeChoice} eq 1" class="icon" style="width: 5%;"><img
+									src="/img/news/notice.png" alt="공지" style="max-width: 30px;" /></td>
+							<td th:if="${notice.noticeChoice} eq 2" class="icon" style="width: 5%;"><img
+									src="/img/news/check.png" alt="점검" style="max-width: 30px;" /></td>
+							<!-- 글제목 -->
+							<td class="title"><a th:href="@{/news/noticeView(noticeSeq = ${notice.noticeSeq})}"
+									th:text="${notice.noticeTitle}"></a></td>
+							<!-- 작성일자 -->
+							<td th:text="${notice.noticeDate}"></td>
+							<!-- 삭제 및 수정 버튼 (관리자세션이 작성자값과 같으면 삭제 및 수정 버튼 생성)-->
+							<td th:if="${#strings.equals(member.role,'ROLE_ADMIN')}">
+								<a class="button_b" th:href="@{/news/noticeUpdateForm(noticeSeq=${notice.noticeSeq})}"
+									th:text="수정"></a>
+							</td>
+							<td th:if="${#strings.equals(member.role,'ROLE_ADMIN')}"><a class="button_b"
+									th:href="@{/news/noticeDelete(noticeSeq=${notice.noticeSeq}, noticeChoice=${notice.noticeChoice})}"
+									th:text="삭제"></a></td>
+						</tr>
+					</tbody>
+				</table>
+				<!-- 페이징 및 검색 처리 -->
+				<div class="page_num">
+					<th:block th:if="${!noticeList.empty}" th:each="page : ${#numbers.sequence(startPage, endPage)}">
+						<a th:if="${page != nowPage}"
+							th:href="@{/news/notice(page=${page - 1}, searchKeyword=${param.searchKeyword}, searchCode=${param.searchCode}, noticeChoice=${param.noticeChoice})}"
+							th:text="${page}"></a>
+						<strong th:if="${page == nowPage}" th:text="${page}" style="color:red"></strong>
+					</th:block>
+				</div>
+			</div>
+			<!-- news_board end -->
+		</div>
+		<!-- notice_wrap end -->
+	</div>
+	<!-- div_inner end -->
+</div>
+<!-- container end -->
+<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+
+</html>

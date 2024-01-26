@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
+<style>
+.seal_text_area {
+    width: 500%;
+}
+</style>
+<link rel="stylesheet" href="/css/form.css" type="text/css"> 
+<script type="text/javascript" src="/js/guide.js?v=2"></script>
+<!-- header end -->
+<div class="mnb_wrap">
+	<div class="div_inner2">
+		<ul class="mnb_list"><!-- 기초 가이드/캐릭터 소개 tab -->
+			<li class=active><a href="/guide/guide">기초 가이드</a></li>
+			<li class=active><a href="/guide/character">캐릭터 소개</a></li>
+		</ul>
+	</div>
+</div>
+<div class="mnb_blank"></div>
+<!-- container str -->
+<div id="container">
+	<!-- div_inner str -->
+	<div class="div_inner">
+		<!-- notice_wrap str -->
+		<div class="contents_wrap2">
+			<form name="guideInsertForm" action="/guide/guideInsert" method="post" enctype="multipart/form-data">
+				<input type="hidden" id="guideWriter" name="guideWriter" th:value="${member.id}"><!--작성자 정보 세션으로 가져오기-->
+				<h1 class="con_title">
+					기초 가이드 등록
+				</h1>
+				<div class="seal_tb2" style="background-color: white;">
+					<!--가이드 제목-->
+					<div class="seal_col">
+						<div class="th">제목</div>
+						<div class="td">
+							<input type="text" name="guideTitle" class="seal_title" placeholder="35자 이내로입력해 주세요." />
+						</div>
+					</div>
+					<!-- 파일 첨부 -->
+					<div class="seal_col">
+						<div class="th">파일첨부</div>
+						<div class="td">
+							<input type="file" name="file" multiple /> <!-- 여러개의 파일 업로드 가능 -->
+							<span class="file_size">최대 파일용량 : 5MByte</span>
+						</div>
+					</div>
+					<!--내용-->
+					<div class="seal_col">
+						<div class="th title">내용</div>
+						<div class="td">
+							<textarea name="guideContents" class="seal_text_area" id="guideContents"
+								style="resize:none;"></textarea>
+						</div>
+					</div>
+				</div>
+				<div class="guide_btn_wrap">
+					<input class="btn03_g" type="button" value="확인" onclick="guideInsert()">
+					<input class="btn03_b" type="reset" value="다시 작성">
+				</div>
+			</form>
+		</div>
+		<!-- notice_wrap end -->
+	</div>
+	<!-- div_inner end -->
+</div>
+<!-- container end -->
+<!-- footer str -->
+<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+
+</html>

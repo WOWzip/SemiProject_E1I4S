@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
+
+<link rel="stylesheet" type="text/css" href="/css/join.css">
+
+<script>
+	function checkJoinName() {
+		var name = $('#name').val();
+		/* name : 한글 이름 2~4자 이내 */
+		const regId = new RegExp(/^[가-힣]{2,4}$/);
+
+		/* 휴대폰 번호 형식*/
+		const regPhoneNumber = new RegExp(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/);
+
+		/* 생년월일 6자리 */
+		const regBirth = new RegExp(/([0-9]{2}(0[1-9]|1[0-2])(0[1-9]|[1,2][0-9]|3[0,1]))/);
+
+		/* 뒷자리 7자리 */
+		const regBackSocialSecuNum = new RegExp(/[-]*[1-4]\d{6}/);
+
+		var birth = $('#birth').val();
+		var backSocialSecuNum = $('#backSocialSecuNum').val();
+		var phoneNum = $('#phoneNumber').val();
+		var phoneNumber = phoneNum;
+
+		var socialSecuNum = birth + "" + backSocialSecuNum;
+
+		$('#socialSecuNum').val(socialSecuNum.trim());
+
+		if ($('#name').val() == "") {
+			alert("이름을 입력하세요~");
+			$('#name').focus();
+			return;
+		} else if (regId.test($('#name').val()) != true) {
+			alert("이름는 2 ~ 4글자 한글!")
+			$('#name').focus();
+			return;
+		} else if ($('#birth').val() == "") {
+			alert("주민번호를 입력하세요");
+			$('#birth').focus();
+			return;
+		} else if ($('#backSocialSecuNum').val() == "") {
+			alert("주민번호를 입력하세요");
+			$('#backSocialSecuNum').focus();
+			return;
+		} else if (regBirth.test($('#birth').val()) != true) {
+			alert("정확한 주민번호를 입력하세요");
+			$('#birth').focus();
+			return;
+		} else if (regBackSocialSecuNum.test($('#backSocialSecuNum').val()) != true) {
+			alert("정확한 주민번호를 입력하세요");
+			$('#backSocialSecuNum').focus();
+			return;
+		}
+		else if ($('#phoneNumber').val() == "") {
+			alert("전화번호를 입력하세요~");
+			$('#phoneNumber').focus();
+			return;
+		} else if (regPhoneNumber.test($('#phoneNumber').val()) != true) {
+			alert("정확한 번호를 입력해 주세요")
+			$('#phoneNumber').focus();
+			return;
+		}
+
+		$.ajax({
+			url: "checkJoinName",
+			type: 'post',
+			data: {
+				"name": name,
+				"socialSecuNum": socialSecuNum,
+				"phoneNumber": phoneNumber
+			},
+			success: function (data) {
+				console.log(data);
+				if (data != null) {
+					if (data.result === 'ok') {
+						console.log(data.result);
+						if (confirm("회원 가입이 가능합니다 \n가입하시겠습니까?")) {
+							// 비회원 = 가입선택 o >> 회원가입 페이지 이동
+							console.log(socialSecuNum);
+							$('#joinCheckForm').submit();
+						}
+						// 비회원 - 가입선택 x
+						return false;
+					} else if (data.result === 'phone') {
+						console.log(data.result);
+						alert("전화번호 중복 입니다.");
+						$("#name").focus();
+					} else {
+						// 회원 => 
+						console.log(data.result);
+						alert("이미 회원입니다.");
+						$("#name").focus();
+					}
+				}
+
+			},
+			error: function () {
+				alert("error");
+				console.log(data);
+			}
+		});
+	}
+</script>
+
+<body>
+	<div id="wrap">
+		<div class="join_container">
+			<div class="informationInput">
+				<h2>기본 정보 확인</h2>
+			</div>
+			<form id="joinCheckForm" name="joinCheckForm" th:action="@{/join/join}" method="post">
+
+				<label for="name">Name:</label> <!-- 한글 이름 2~4자 이내 -->
+				<input type="text" id="name" name="name" required><br>
+
+				<label for="birth">주민번호 :</label>
+				<input type="text" id="birth" name="birth" size="7" maxlength="6" required />
+				<strong>-</strong>
+				<input type="password" id="backSocialSecuNum" name="backSocialSecuNum" maxlength="7" required />
+				<input type="hidden" id="socialSecuNum" name="socialSecuNum" value="">
+
+				<label for="phoneNumber">Phone Number:</label>
+				<input type="tel" id="phoneNumber" name="phoneNumber" maxlength="11" required><br>
+
+				<input type="button" value="등록" onclick="checkJoinName()" />
+				<input type="button" value="메인페이지로" onclick="location.href='/'" />
+			</form>
+		</div>
+	</div>
+
+</body>
+<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+
+</html>

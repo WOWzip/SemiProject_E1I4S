@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
+<!--페이지 관련 -->
+<link rel="stylesheet" type="text/css" href="/css/join.css">
+
+
+<body>
+	<div id="wrap">
+
+		<!-- section -->
+		<div class="join_success">
+			<h1>회원가입 완료</h1><br />
+			<hr />
+			<hr />
+			<a class="button_b" href="/"> 메인 페이지 이동 </a>
+			<a class="button_b" href="/login"> 로그인 페이지 이동</a>
+		</div>
+
+
+	</div>
+</body>
+
+<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+
+</html>
