@@ -30,37 +30,37 @@
 
 주요기능
 1. 로그인
-![image](https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/328fd432-786e-4212-b4d1-63233d99c8a8)
+ <img src="[/path/to/img.jpg](https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/328fd432-786e-4212-b4d1-63233d99c8a8)" width="40%" height="30%" alt="로그인"></img>
    
-2. 회원가입
+3. 회원가입
 ![image](https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/2ed53764-865d-4527-933c-071224c5d67a)
 
-3. 메인페이지
+4. 메인페이지
 ![image](https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/60708539-0183-41bd-b2a5-cac7767ff11b)
 
-4. 마이페이지
+5. 마이페이지
 ![image](https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/41f1b0ed-7a22-4a1a-8141-57d403b2b44f)
 
-5. 공지사항
+6. 공지사항
 ![image](https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/3e7a727b-5453-4d15-b6bb-c3929d4171d0)
 
-6. 이벤트
+7. 이벤트
 ![image](https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/388e76b5-da95-4e7f-9838-9c92c07ef9c0)
 
-7. 가이드
+8. 가이드
 ![image](https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/a31d2ea2-5037-42e9-9576-88a3c038a403)
   
-8. 캐릭터 소개
+9. 캐릭터 소개
 ![image](https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/d68cda88-dfe6-46bd-9780-5e8d2c49c6dc)
 
-9. 유저 랭킹
+10. 유저 랭킹
 ![image](https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/54d4e3dd-910e-4b17-a515-70446f9d13c0)
 
-10. 커뮤니티
+11. 커뮤니티
 ![image](https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/68d369cf-8a88-4eb2-affe-ed4110133335)
 
 
-11. 포인트 상점
+12. 포인트 상점
 ![image](https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/1b97e5b1-d41c-4bf4-b184-12e7c3fe89a2)
 
 ![image](https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/9dc84fea-335e-411d-97f8-e9c853b1c6f4)
