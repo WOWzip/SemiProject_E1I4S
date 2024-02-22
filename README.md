@@ -30,7 +30,8 @@
 
 주요기능
 1. 로그인
- <img src="[/path/to/img.jpg](https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/328fd432-786e-4212-b4d1-63233d99c8a8)" width="40%" height="30%" alt="로그인"></img>
+ ![image](https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/328fd432-786e-4212-b4d1-63233d99c8a8)
+ <img src="https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/328fd432-786e-4212-b4d1-63233d99c8a8" width="40%" height="30%" alt="로그인"></img>
    
 3. 회원가입
 ![image](https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/2ed53764-865d-4527-933c-071224c5d67a)
