@@ -30,65 +30,61 @@
 
 주요기능
 1. 로그인
- ![image](https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/328fd432-786e-4212-b4d1-63233d99c8a8)
  <img src="https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/328fd432-786e-4212-b4d1-63233d99c8a8" width="40%" height="30%" alt="로그인"></img>
    
-3. 회원가입
-![image](https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/2ed53764-865d-4527-933c-071224c5d67a)
+2. 회원가입
+ <img src="https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/2ed53764-865d-4527-933c-071224c5d67a" width="40%" height="30%" alt="회원가입"></img>
 
-4. 메인페이지
-![image](https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/60708539-0183-41bd-b2a5-cac7767ff11b)
+3. 메인페이지
+ <img src="https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/60708539-0183-41bd-b2a5-cac7767ff11b" width="40%" height="30%" alt="메인페이지"></img>
 
-5. 마이페이지
-![image](https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/41f1b0ed-7a22-4a1a-8141-57d403b2b44f)
+4. 마이페이지
+ <img src="https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/41f1b0ed-7a22-4a1a-8141-57d403b2b44f" width="40%" height="30%" alt="마이페이지"></img>
 
-6. 공지사항
-![image](https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/3e7a727b-5453-4d15-b6bb-c3929d4171d0)
+5. 공지사항
+ <img src="https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/3e7a727b-5453-4d15-b6bb-c3929d4171d0" width="40%" height="30%" alt="공지사항"></img>
 
-7. 이벤트
-![image](https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/388e76b5-da95-4e7f-9838-9c92c07ef9c0)
+6. 이벤트
+<img src="https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/388e76b5-da95-4e7f-9838-9c92c07ef9c0" width="40%" height="30%" alt="이벤트"></img>
 
-8. 가이드
-![image](https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/a31d2ea2-5037-42e9-9576-88a3c038a403)
+7. 가이드
+<img src="https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/a31d2ea2-5037-42e9-9576-88a3c038a403" width="40%" height="30%" alt="가이드"></img>
   
-9. 캐릭터 소개
-![image](https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/d68cda88-dfe6-46bd-9780-5e8d2c49c6dc)
+8. 캐릭터 소개
+<img src="https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/d68cda88-dfe6-46bd-9780-5e8d2c49c6dc" width="40%" height="30%" alt="캐릭터 소개"></img>
 
-10. 유저 랭킹
-![image](https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/54d4e3dd-910e-4b17-a515-70446f9d13c0)
+9. 유저 랭킹
+<img src="https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/54d4e3dd-910e-4b17-a515-70446f9d13c0" width="40%" height="30%" alt="유저 랭킹"></img>
 
-11. 커뮤니티
-![image](https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/68d369cf-8a88-4eb2-affe-ed4110133335)
+10. 커뮤니티
+<img src="https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/68d369cf-8a88-4eb2-affe-ed4110133335" width="40%" height="30%" alt="커뮤니티"></img>
 
 
-12. 포인트 상점
-![image](https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/1b97e5b1-d41c-4bf4-b184-12e7c3fe89a2)
-
-![image](https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/9dc84fea-335e-411d-97f8-e9c853b1c6f4)
+11. 포인트 상점
+<img src="https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/1b97e5b1-d41c-4bf4-b184-12e7c3fe89a2" width="40%" height="30%" alt="포인트상점1"></img>
+<img src="https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/9dc84fea-335e-411d-97f8-e9c853b1c6f4" width="40%" height="30%" alt="포인트상점2"></img>
 
 
 12. 고객지원
-![image](https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/440f310e-4147-4214-a502-6e808d9134fe)
-![image](https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/0661b1be-18f4-4ff1-aaf8-f8bcbf39d45c)
-
-![image](https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/5d6db887-86e7-4e52-834f-3baf55d70dfe)
+<img src="https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/440f310e-4147-4214-a502-6e808d9134fe" width="40%" height="30%" alt="고객지원1"></img>
+<img src="https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/0661b1be-18f4-4ff1-aaf8-f8bcbf39d45c" width="40%" height="30%" alt="고객지원2"></img>
+<img src="https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/5d6db887-86e7-4e52-834f-3baf55d70dfe" width="40%" height="30%" alt="고객지원3"></img>
 
 
 13. 관리자 페이지
-1) 관리자 코드입력 페이지 
-![image](https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/ec95423e-50ac-486e-bee1-529235cf930c)
+1) 관리자 코드입력 페이지
+<img src="https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/ec95423e-50ac-486e-bee1-529235cf930c" width="40%" height="30%" alt="관리자 코드입력"></img>
 
 2) 관리자 메인페이지 
-![image](https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/b734f371-7958-4f86-9881-1ced7eaf7f4e)
-
+<img src="https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/b734f371-7958-4f86-9881-1ced7eaf7f4e" width="40%" height="30%" alt="관리자 메인"></img>
 
 
 14. 관리자 회원가입
-![image](https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/343abc44-b208-4eca-80bc-866b78c2bfd0)
+<img src="https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/343abc44-b208-4eca-80bc-866b78c2bfd0" width="40%" height="30%" alt="관리자 회원가입"></img>
 
 
 15. 관리자 고객지원 페이지
-![image](https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/916adacc-f6a5-43b7-9d29-f07b0c18c91d)
+<img src="https://github.com/WOWzip/SemiProject_E1I4S/assets/142926896/916adacc-f6a5-43b7-9d29-f07b0c18c91d" width="40%" height="30%" alt="관리자 고객지원원"></img>
  
 
 
