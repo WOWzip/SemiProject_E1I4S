@@ -17,7 +17,7 @@
   
 ---
 
-## :books: 기술 스택
+## 기술 스택
 ### 프론트엔드
   <img src="https://img.shields.io/badge/thymeleaf-005F0F?style=for-the-badge&logo=thymeleaf&logoColor=white">  <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img src="https://img.shields.io/badge/css3-1572B6?style=for-the-badge&logo=css3&logoColor=white">
   <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white">
@@ -50,31 +50,32 @@
 ---
 
 
-## ✨주요기능
-### 1. 로그인 <br/>
+## 🚩주요기능
+### ⭐1. 공지사항/이벤트/가이드/캐릭터소개 <br/>
+
+ >내가 맡은 부분
+- 각각 페이지의 CRUD 구현
+- 검색기능 구현
+- 페이징 처리
+
+### 2. 로그인 <br/>
 - Security 활용
 - Kakao API, Google API 를 이용하여 소셜 로그인 구현 
 
    
-### 2. 회원가입 <br/>
+### 3. 회원가입 <br/>
 - Daum API 를 이용하여 주소 조회
 
 
-### 3. 메인페이지 <br/>
+### 4. 메인페이지 <br/>
 - 메인 페이지에서 이벤트 및 공지사항 등 정보 제공
 - 게임start버튼 클릭 시, 랜덤 룰렛으로 포인트 획득 가능
   
 
-### 4. 마이페이지 <br/>
+### 5. 마이페이지 <br/>
 - 개인정보 변경, 비밀번호 변경, 회원 탈퇴
 - 본인확인용 비밀번호 입력 페이지
 - 아이디/비밀번호 찾기 : 입력값이 모두 일치하면 ID 를 해당 이메일로 전송
-
-
-### 5. 공지사항/이벤트/가이드/캐릭터소개 <br/>
-- 각각 페이지의 CRUD 구현
-- 검색기능 구현
-- 페이징 처리
 
 
 ### 6. 유저 랭킹 <br/>
@@ -107,7 +108,7 @@
 |Role|Work|
 |---|---|
 |팀장|총괄, 고객지원, 관리자 페이지|
-|나⭐|AWS 서버구축, 뉴스, 가이드, 랭킹 페이지|
+|나⭐|AWS 서버구축, 공지사항, 이벤트, 가이드, 캐릭터소개, 랭킹 페이지|
 |팀원|회원가입, 로그인(security), 마이페이지|
 |팀원|데이터 준비, 커뮤니티 페이지|
 |팀원|발표, 포인트 상점 페이지|
