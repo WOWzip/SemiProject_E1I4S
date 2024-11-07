@@ -10,6 +10,4 @@ public interface FolderPathREPO {
 	public static final String PRODUCT_IMAGE = "D:\\_Fintech\\WorkSpace\\myApp\\src\\main\\resources\\static\\productImage";
 	public static final String EVENT_IMAGE_REPO = "D:\\_Fintech\\WorkSpace\\myApp\\src\\main\\resources\\static\\eventImage";
 
-	
-    public static final String SECRET_KEY = "JVYW7HKKOSBWONWHSDMWLPWIZNXD11W7";
 }
